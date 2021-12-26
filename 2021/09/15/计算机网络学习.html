@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计网," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Cm's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1. 网络分层模型 OSI七层模型   应用层  网络服务与最终用户的一个接口。  协议有：HTTP FTP TFTP SMTP SNMP DNS TELNET HTTPS POP3 DHCP   表示层  数据的表示、安全、压缩。（在五层模型里面已经合并到了应用层）  格式有，JPEG、ASCll、EBCDIC、加密格式等   会话层  建立、管理、终止会话。（在五层模型里面已经合并到了应用层）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络学习">
+<meta property="og:url" content="http://cmblogs.cn/2021/09/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0.html">
+<meta property="og:site_name" content="Cm&#39;s blog">
+<meta property="og:description" content="1. 网络分层模型 OSI七层模型   应用层  网络服务与最终用户的一个接口。  协议有：HTTP FTP TFTP SMTP SNMP DNS TELNET HTTPS POP3 DHCP   表示层  数据的表示、安全、压缩。（在五层模型里面已经合并到了应用层）  格式有，JPEG、ASCll、EBCDIC、加密格式等   会话层  建立、管理、终止会话。（在五层模型里面已经合并到了应用层）">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418093058230.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416165542507.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416165558640.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210421104500887.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210421114104224.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021042517344319.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210425173734406.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210425174424677.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210425174632528.png">
+<meta property="article:published_time" content="2021-09-15T08:50:05.000Z">
+<meta property="article:modified_time" content="2021-12-13T17:03:58.658Z">
+<meta property="article:author" content="Kiros">
+<meta property="article:tag" content="计网">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210418093058230.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://cmblogs.cn/2021/09/15/计算机网络学习.html"/>
+
+
+
+
+
+  <title>计算机网络学习 | Cm's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cm's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cmblogs.cn/2021/09/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赤埋 | Kiros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cm's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-15T16:50:05+08:00">
+                2021-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-网络分层模型"><a href="#1-网络分层模型" class="headerlink" title="1. 网络分层模型"></a>1. 网络分层模型</h2><ul>
+<li><p><strong>OSI七层模型</strong></p>
+<p>  <strong>应用层</strong><br>  网络服务与最终用户的一个接口。<br>  协议有：HTTP FTP TFTP SMTP SNMP DNS TELNET HTTPS POP3 DHCP</p>
+<p>  <strong>表示层</strong><br>  数据的表示、安全、压缩。（在五层模型里面已经合并到了应用层）<br>  格式有，JPEG、ASCll、EBCDIC、加密格式等</p>
+<p>  <strong>会话层</strong><br>  建立、管理、终止会话。（在五层模型里面已经合并到了应用层）<br>  对应主机进程，指本地主机与远程主机正在进行的会话</p>
+<p>  <strong>传输层</strong><br>  定义传输数据的协议端口号，以及流控和差错校验。<br>  协议有：TCP UDP，数据包一旦离开网卡即进入网络传输层</p>
+<p>  <strong>网络层</strong><br>  进行逻辑地址寻址，实现不同网络之间的路径选择。<br>  协议有：ICMP IGMP IP（IPV4 IPV6）</p>
+<p>  <strong>数据链路层</strong><br>  建立逻辑连接、进行硬件地址寻址、差错校验 [3]  等功能。（由底层网络定义协议）<br>  将比特组合成字节进而组合成帧，用MAC地址访问介质，错误发现但不能纠正。</p>
+<p>  <strong>物理层</strong><br>  建立、维护、断开物理连接。（由底层网络定义协议）</p>
+  <span id="more"></span></li>
+</ul>
+<ul>
+<li><p><strong>TCP/IP 四层模型</strong></p>
+<p>  <strong>应用层</strong></p>
+<p>  <strong>运输层</strong></p>
+<p>  <strong>网络层</strong></p>
+<p>  <strong>数据链路层</strong></p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210418093058230.png" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="2-三握四挥"><a href="#2-三握四挥" class="headerlink" title="2. 三握四挥"></a>2. 三握四挥</h2><p><img src="https://img-blog.csdnimg.cn/20210416165542507.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p><strong><font color = #E579B6> 为什么要握手</font></strong><br>  为了保证可靠性传输，TCP需要两边维护socket，序列号，和窗口大小（流量控制用），握手就是为了在数据开始传输前让客户端和服务器准确无误的交换上述信息。</p>
+<p>  需要握手的原因：</p>
+<ol>
+<li>阻止已经失效的历史请求的初始化【谢希仁】</li>
+<li>只有通过三次握手才能交换序列号</li>
+</ol>
+</li>
+<li><p><strong><font color = #E579B6> 为什么要三次握手</font></strong></p>
+<p>  因为第一二次握手只是让客户端知道了客户端发送的请求服务器端可以收到，服务器端发送的请求客户端自己也能收到，但是对服务器端来说，它只知道客户端发送的请求自己能收到，但是自己发送的请求不知道客户端能不能收到，所以需要第三次握手来让服务器端知道，这也是建立连接需要的最少次数。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210416165558640.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><p><strong><font color = #E579B6> 为什么是三握四挥而不是四握四挥</font></strong></p>
+<p>  因为TCP建立连接时之所以只需要”三次握手”，是因为在第二次”握手”过程中，服务器端发送给客户端的TCP报文是以SYN与ACK作为标志位的。<strong>SYN是请求连接标志</strong>，表示服务器端同意建立连接；<strong>ACK是确认报文</strong>，表示告诉客户端，服务器端收到了它的请求报文。</p>
+<p>  即与挥手相比，第二次握手的时候<strong>服务器端将确认接收报文和请求连接报文合在一起发给了客户端</strong>，所以相比四挥少了一次。</p>
+<p>  建立连接时，被动方服务器端结束CLOSED阶段进入“握手”阶段<strong>并不需要任何准备，可以直接返回SYN和ACK报文</strong>，开始建立连接。</p>
+<p>  释放连接时，被动方服务器，突然收到主动方客户端释放连接的请求时<strong>并不能立即释放连接</strong>，因为还有必要的数据需要处理，所以服务器<strong>先返回ACK确认收到报文</strong>，经过<strong>CLOSE-WAIT阶段准备好释放连接之后，才能返回FIN释放连接报文</strong>。</p>
+</li>
+</ul>
+<br/>
+
+
+<ul>
+<li><p><strong>为什么客户端在TIME-WAIT阶段要等2MSL</strong></p>
+<p>  为的是确认服务器端是否收到客户端发出的ACK确认报文</p>
+<p>  当客户端发出最后的ACK确认报文时，并不能确定服务器端能够收到该段报文。所以客户端在发送完ACK确认报文之后，会设置一个时长为2MSL的计时器。</p>
+<p>  MSL指的是Maximum Segment Lifetime：一段TCP报文在传输过程中的最大生命周期。<strong>2MSL即是服务器端发出为FIN报文和客户端发出的ACK确认报文所能保持有效的最大时长</strong>。</p>
+<p>  如果客户端在2MSL内，再次收到了来自服务器端的FIN报文，说明服务器端由于各种原因没有接收到客户端发出的ACK确认报文。客户端再次向服务器端发出ACK确认报文，计时器重置，<strong>重新开始2MSL的计时</strong>；<br>否则客户端在2MSL内没有再次收到来自服务器端的FIN报文，说明服务器端正常接收了ACK确认报文，客户端可以进入CLOSED阶段，<strong>完成“四次挥手”</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="3-ICMP协议的应用"><a href="#3-ICMP协议的应用" class="headerlink" title="3.  ICMP协议的应用"></a>3.  ICMP协议的应用</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Mrspe/articles/12335328.html">ICMP协议的应用</a></p>
+<p><font color = #E579B6> ping命令和traceRoute:</font></p>
+<p>tracert（traceroute）工具<br>tracert和traceroute是一样的意思，只是一个常用在华为设备上，一个用在思科设备上<br>可以跟踪网络中从源节点到目标节点中间所经过的所有三层节点信息</p>
+<p>tracert（traceroute）和ping一样可以跟IP和域名<br><img src="https://img-blog.csdnimg.cn/20210421104500887.png" alt="在这里插入图片描述"><br>这两个工具常用于检查连通性和排查故障节点</p>
+<hr>
+<h2 id="4-TCP如何保证可靠性"><a href="#4-TCP如何保证可靠性" class="headerlink" title="4. TCP如何保证可靠性"></a>4. TCP如何保证可靠性</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/de85547cd5de">TCP协议详解</a><br><strong>+</strong><br><font color = #E579B6> 校验和:</font></p>
+<p>计算方式：在数据传输的过程中，将发送的数据段都当做一个<strong>16位的整数</strong>。将这些整数加起来。并且前面的进位不能丢弃，补在后面，最后取反，得到校验和。<br>发送方：在发送数据之前计算检验和，并进行校验和的填充。<br>接收方：收到数据后，对数据以同样的方式进行计算，求出校验和，与发送方的进行<strong>比对</strong>。<br><img src="https://img-blog.csdnimg.cn/20210421114104224.png" alt="在这里插入图片描述"><br>注意：如果接收方比对校验和与发送方不一致，那么数据一定传输有误。但是如果接收方比对校验和与发送方一致，<strong>数据不一定传输成功</strong>。</p>
+<hr>
+<h2 id="5-如何实现UDP的可靠传输"><a href="#5-如何实现UDP的可靠传输" class="headerlink" title="5. 如何实现UDP的可靠传输"></a>5. 如何实现UDP的可靠传输</h2><p>UDP不属于连接协议，具有资源消耗少，处理速度快的优点，所以通常音频，视频和普通数据在传送时，使用UDP较多，因为即使丢失少量的包，也不会对接受结果产生较大的影响。</p>
+<p>传输层无法保证数据的可靠传输，只能通过应用层来实现了。实现的方式可以参照tcp可靠性传输的方式，只是<strong>实现不在传输层</strong>，实现转<strong>移到了应用层</strong>。</p>
+<p>最简单的方式是在<strong>应用层模仿传输层</strong>TCP的可靠性传输。下面不考虑拥塞处理，可靠UDP的简单设计。</p>
+<ol>
+<li><p>添加seq/ack机制，确保数据发送到对端</p>
+</li>
+<li><p>添加发送和接收缓冲区，主要是用户超时重传。</p>
+</li>
+<li><p>添加超时重传机制。</p>
+</li>
+</ol>
+<p>详细说明：送端发送数据时，生成一个随机seq=x，然后每一片按照数据大小分配seq。数据到达接收端后接收端放入缓存，并发送一个ack=x的包，表示对方已经收到了数据。发送端收到了ack包后，删除缓冲区对应的数据。时间到后，定时任务检查是否需要重传数据。</p>
+<p>目前有如下开源程序利用udp实现了可靠的数据传输。分别为RUDP、RTP、UDT。</p>
+<hr>
+<h2 id="6-HTTPS的请求过程（SSL握手过程）"><a href="#6-HTTPS的请求过程（SSL握手过程）" class="headerlink" title="6. HTTPS的请求过程（SSL握手过程）"></a>6. HTTPS的请求过程（SSL握手过程）</h2><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>客户端 -&gt; 服务器</strong></td>
+<td>Client Hello</td>
+<td><strong>传输客户端支持的加密组合、SSL版本与随机数Random1</strong>（质数）</td>
+</tr>
+<tr>
+<td><strong>服务器 -&gt; 客户端</strong></td>
+<td>Server Hello</td>
+<td><strong>选择客户端支持的加密方法与随机数Random2等</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>Certificate</td>
+<td>服务端将自己的<strong>证书下发</strong>给客户端，让客户<strong>验证自己的身份</strong>，客户端<strong>验证通过后取出证书中的公钥</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>Server Key Exchange</td>
+<td>RSA：不需要 <br> DHE / ECDHE：需要</td>
+</tr>
+<tr>
+<td></td>
+<td>Server Hello done</td>
+<td>通知客户端 Server Hello 结束</td>
+</tr>
+<tr>
+<td><strong>客户端 -&gt; 服务器</strong></td>
+<td>Client Key Exchange</td>
+<td>客户端验证通过的证书取出公钥，生成并利用公钥加密随机数：<strong>preMaster secret</strong>，将其发给服务端。服务端利用私钥解密获得随机数。<br> 至此，客户端与服务端都拥有三个随机数，双方根据约定的算法生成一个秘钥<strong>master secret</strong>。之后的数据传输都是用这个密钥进行加解密</td>
+</tr>
+<tr>
+<td></td>
+<td>Change Cipher Spec</td>
+<td>客户端通知服务端后面再发送的消息都会使用前面协商出来的秘钥<strong>master　secret</strong>加密</td>
+</tr>
+<tr>
+<td></td>
+<td>Encrypted Handshake Message</td>
+<td>代表了握手结束。客户端将握手消息等数据生成摘要再用<strong>master secret</strong>加密。<br> 服务端接收后解密，并验证数据。</td>
+</tr>
+<tr>
+<td><strong>服务器 -&gt; 客户端</strong></td>
+<td>Change Cipher Spec</td>
+<td>同上</td>
+</tr>
+<tr>
+<td></td>
+<td>Encrypted Handshake Message</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>整个过程分为以下几步：</strong></p>
+<ol>
+<li><p>客户端浏览器发起往服务器的 <strong>443</strong> 端口发起请求，请求携带了浏览器支持的加密算法和哈希算法。</p>
+</li>
+<li><p>服务器收到请求，选择浏览器支持的<strong>加密算法和哈希算法</strong>。</p>
+</li>
+<li><p>服务器下将数字证书返回给浏览器，这里的数字证书可以是向某个可靠机构申请的，也可以是自制的。</p>
+</li>
+</ol>
+<p><em>（注释：证书包括以下这些内容：1. 证书序列号。2. 证书过期时间。3. 站点组织名。4. 站点DNS主机名。5. 站点公钥。6. 证书颁发者名。7. 证书签名。因为证书就是要给大家用的，所以不需要加密传输）</em></p>
+<ol start="4">
+<li><p>浏览器进入数字证书认证环节，这一部分是浏览器内置的 TSL 完成的：</p>
+<p> (1) 首先浏览器会从<strong>内置的证书列表</strong>中索引，找到服务器下发证书对应的机构，如果没有找到，此时就会提示用户该证书是不是由权威机构颁发，是<strong>不可信任</strong>的。如果查到了对应的机构，则取出<strong>该机构颁发的公钥</strong>。</p>
+<p> (2) 用机构的证书公钥解密得到证书的内容和证书签名，内容包括网站的网址、网站的公钥、证书的有效期等。浏览器会先验证证书签名的合法性（验证过程类似上面 Bob 和 Susan 的通信）。签名通过后，浏览器验证证书记录的网址是否和当前网址是一致的，不一致会提示用户。如果网址一致会检查证书有效期，证书过期了也会提示用户。这些都通过认证时，浏览器就可以安全使用证书中的网站公钥了。</p>
+<p> (3) 浏览器生成一个<strong>随机数 R</strong>，并使用<strong>网站公钥</strong>对 R 进行加密</p>
+</li>
+<li><p>浏览器将加密的 R 传送给服务器。</p>
+</li>
+<li><p>服务器用自己的私钥解密得到 R。</p>
+</li>
+<li><p>服务器以 R 为密钥使用了对称加密算法加密网页内容并传输给浏览器，<br> 浏览器以 R 为密钥使用之前约定好的解密算法获取网页内容。</p>
+</li>
+</ol>
+<hr>
+<h2 id="7-输入网址到浏览器显示页面经历的过程"><a href="#7-输入网址到浏览器显示页面经历的过程" class="headerlink" title="7. 输入网址到浏览器显示页面经历的过程"></a>7. 输入网址到浏览器显示页面经历的过程</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yanshuanche3765/article/details/82589210">DNS域名解析系统对输入的网址进行解析</a>    - 浏览器缓存 -&gt; 系统缓存(c盘/host) -&gt; 本地域名服务器(LDNS) -&gt; Root Server域名服务器</li>
+</ol>
+<pre><code>- DNS域名解析系统本质就是一个数据服务器，里面存储了域名和IP的对应关系
+- 最后会得到一个IP地址，通过这个IP地址，才能访问一台服务器
+- 得到一个地址后，就能知道我们要访问哪一台服务器了
+</code></pre>
+<ol start="2">
+<li>客户端和服务端进行tcp的三次握手建立连接</li>
+<li>客户端发送HTTP请求，服务端响应请求</li>
+</ol>
+<pre><code>- 客户端根据用户操作，如按下回车键，向服务器发送HTTP请求
+- 服务器接受请求，然后进行处理，整合需要的资源，通过HTTP协议传输响应发送给客户端浏览器
+</code></pre>
+<ol start="4">
+<li>浏览器解析渲染页面</li>
+<li>连接结束</li>
+</ol>
+<hr>
+<h2 id="8-DNS协议用到了什么传输层协议？"><a href="#8-DNS协议用到了什么传输层协议？" class="headerlink" title="8. DNS协议用到了什么传输层协议？"></a>8. DNS协议用到了什么传输层协议？</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuyepeng/p/9835839.html">DNS用的是TCP协议还是UDP协议</a></p>
+<p><strong>为什么既使用TCP又使用UDP？</strong> </p>
+<p>首先了解一下TCP与UDP传送字节的长度限制：<br>UDP报文的最大长度为512字节，而TCP则允许报文长度超过512字节。当DNS查询超过512字节时，协议的TC标志出现删除标志，这时则使用TCP发送。通常传统的UDP报文一般不会大于512字节。 </p>
+<p>DNS占用<strong>53</strong>号端口，同时使用TCP和UDP协议。那么DNS在什么情况下使用这两种协议？</p>
+<p>DNS在区域传输的时候使用TCP协议，其他时候使用UDP协议。</p>
+<p><strong>区域传输的时候使用TCP协议</strong>：</p>
+<ol>
+<li><p>辅域名服务器会定时（一般3小时）向主域名服务器进行查询以便了解数据是否有变动。如有变动，会执行一次区域传送，进行数据同步。区域传送使用TCP而不是UDP，因为数据同步传送的数据量比一个请求应答的数据量要多得多。</p>
+</li>
+<li><p>TCP是一种可靠连接，保证了数据的准确性。</p>
+</li>
+</ol>
+<p><strong>域名解析时使用UDP协议</strong>：</p>
+<p>客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。不用经过三次握手，这样DNS服务器负载更低，响应更快。理论上说，客户端也可以指定向DNS服务器查询时用TCP，但事实上，很多DNS服务器进行配置的时候，仅支持UDP查询包。</p>
+<hr>
+<h2 id="9-HTTP、TCP、IP报文的结构"><a href="#9-HTTP、TCP、IP报文的结构" class="headerlink" title="9. HTTP、TCP、IP报文的结构"></a>9. HTTP、TCP、IP报文的结构</h2><br>
+
+<p><strong>HTTP请求报文结构：</strong><br><img src="https://img-blog.csdnimg.cn/2021042517344319.png" alt="在这里插入图片描述"></p>
+<p><strong>HTTP响应报文结构：</strong><br><img src="https://img-blog.csdnimg.cn/20210425173734406.png" alt="在这里插入图片描述"><br><strong>状态码说明：</strong></p>
+<ul>
+<li><p>1XX 请求正在处理</p>
+</li>
+<li><p>2XX 请求成功 </p>
+<pre><code>200 OK 正常处理  
+
+204 no content 请求处理成功但没有资源可返回 
+
+206 Partial Content 对资源的某一部分请求
+</code></pre>
+</li>
+<li><p>3XX 重定向 </p>
+<pre><code>301 Moved Permanenly请求资源的URI已经更新（永久移动），客户端会同步更新URI。
+
+302 Found 资源的URI已临时定位到其他位置，客户端不会更新URI。
+
+303 See Other 资源的URI已更新，明确表示客户端要使用GET方法获取资源。
+
+304 Not Modified 当客户端附带条件请求访问资源时资源已找到但未符合条件请求。
+
+307 Temporary Redirect临时重定向
+</code></pre>
+</li>
+<li><p>4XX 客户端错误 </p>
+<pre><code>400 Bad Request 请求报文中存在语法错误，一般为参数异常。
+
+401 Unauthorized 发送的请求需要HTTP认证。
+
+403 Forbiddden 不允许访问，对请求资源的访问被服务器拒绝   
+
+404 Not Found 无法找到请求的资源，请求资源不存在。
+
+405 请求的方式不支持。
+</code></pre>
+</li>
+<li><p>5XX 服务器错误 </p>
+<pre><code>500 Internal Server Error 服务器的内部资源出故障，服务器在执行请求时发生了错误。
+
+503 Service Unavailable 服务器暂时处于超负载状态或正在进行停机维护，无法处理请求，服务器正忙。
+</code></pre>
+</li>
+</ul>
+<p><br><br></p>
+<p><strong>TCP的报文结构：</strong><br><img src="https://img-blog.csdnimg.cn/20210425174424677.png" alt="在这里插入图片描述"></p>
+<p><strong>IP的报文结构：</strong><br><img src="https://img-blog.csdnimg.cn/20210425174632528.png" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="10-Get、Post的区别"><a href="#10-Get、Post的区别" class="headerlink" title="10. Get、Post的区别"></a>10. Get、Post的区别</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/logsharing/p/8448446.html">GET和POST两种基本请求方法的区别</a></p>
+<ol>
+<li><p>GET参数通过<strong>URL</strong>传递，POST放在<strong>Request body</strong>中</p>
+</li>
+<li><p>GET在浏览器回退时是<strong>无害的（幂等）</strong>，而POST会<strong>再次提交请求（非幂等）</strong><br><code>在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同</code></p>
+</li>
+<li><p>GET产生的URL地址可以被Bookmark，而POST不可以</p>
+</li>
+<li><p>GET请求会<strong>被浏览器主动cache</strong>，而POST不会，除非<strong>手动设置</strong></p>
+</li>
+<li><p>GET请求只能进行url编码，而POST支持多种编码方式</p>
+</li>
+<li><p>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留</p>
+</li>
+<li><p>GET请求在URL中传送的参数是有<strong>长度限制</strong>的，而POST么有</p>
+</li>
+<li><p>对参数的数据类型，GET只接受<strong>ASCII</strong>字符，而POST没有限制</p>
+</li>
+<li><p>GET比POST更<strong>不安全</strong>，因为参数直接暴露在URL上，所以不能用来传递敏感信息</p>
+</li>
+</ol>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Kiros
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://cmblogs.cn/2021/09/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0.html" title="计算机网络学习">http://cmblogs.cn/2021/09/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%AE%A1%E7%BD%91/" rel="tag"><i class="fa fa-tag"></i> 计网</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/10/IO%E6%A8%A1%E5%9E%8B.html" rel="next" title="BIO、NIO、AIO 直接拿捏">
+                <i class="fa fa-chevron-left"></i> BIO、NIO、AIO 直接拿捏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/14/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%8B%20%E2%80%94%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html" rel="prev" title="《深入理解Java虚拟机》 — 学习笔记">
+                《深入理解Java虚拟机》 — 学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="赤埋 | Kiros" />
+            
+              <p class="site-author-name" itemprop="name">赤埋 | Kiros</p>
+              <p class="site-description motion-element" itemprop="description">If you want it, go get it.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/kirosxx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:kirosxx@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/weixin_47645663" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="nav-text">1. 网络分层模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5"><span class="nav-text">2. 三握四挥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ICMP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">3.  ICMP协议的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-TCP%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-text">4. TCP如何保证可靠性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0UDP%E7%9A%84%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-text">5. 如何实现UDP的可靠传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-HTTPS%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B%EF%BC%88SSL%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B%EF%BC%89"><span class="nav-text">6. HTTPS的请求过程（SSL握手过程）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%BE%93%E5%85%A5%E7%BD%91%E5%9D%80%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%E7%BB%8F%E5%8E%86%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-text">7. 输入网址到浏览器显示页面经历的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-DNS%E5%8D%8F%E8%AE%AE%E7%94%A8%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%EF%BC%9F"><span class="nav-text">8. DNS协议用到了什么传输层协议？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-HTTP%E3%80%81TCP%E3%80%81IP%E6%8A%A5%E6%96%87%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-text">9. HTTP、TCP、IP报文的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Get%E3%80%81Post%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">10. Get、Post的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kiros</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="theme-info">
+  <span id="busuanzi_container_site_pv">
+  <i class="fa fa-user" aria-hidden="true"></i>
+  <span id="busuanzi_value_site_pv"></span>
+  </span>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span id="busuanzi_container_site_uv">
+  <i class="fa fa-eye" aria-hidden="true"></i>
+  <span id="busuanzi_value_site_uv"></span>
+  </span>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
