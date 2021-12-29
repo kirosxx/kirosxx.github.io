@@ -134,6 +134,134 @@
       </tags>
   </entry>
   <entry>
+    <title>Java学习记录</title>
+    <url>/2021/04/08/Java%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95.html</url>
+    <content><![CDATA[<h2 id="1、动态代理与反射"><a href="#1、动态代理与反射" class="headerlink" title="1、动态代理与反射"></a>1、动态代理与反射</h2><p><a href="https://www.cnblogs.com/jacksontao/p/8552357.html">https://www.cnblogs.com/jacksontao/p/8552357.html</a><br>对于反射：讲的通俗一点的话就是，对于jvm来说，.java文件必须要先编译为.class文件才能够被jvm执行，所以在编译为.class文件的过程中，对象的类型都会被指定好，比如说 User user。那么如果说我想在代码运行的过程中获取到对象的类型呢？或者说程序在运行过程中如何载入一个特定的类呢？这就涉及到了java的反射机制了，反射提供了一套能够让我们在代码运行时也能获取到类型属性的方法。<br>而动态代理，利用java反射机制，动态的生成了一个代理类，直接调用代理方法即可。</p>
+<p><br /><br /></p>
+<span id="more"></span>
+
+<h2 id="2、int和Integer的区别"><a href="#2、int和Integer的区别" class="headerlink" title="2、int和Integer的区别"></a>2、int和Integer的区别</h2><p><a href="https://www.cnblogs.com/guodongdidi/p/6953217.html">https://www.cnblogs.com/guodongdidi/p/6953217.html</a><br>自动装箱与自动拆箱<br><br /></p>
+<p>String a = “a”;    String b = “a”;    这样定义的a和b指向的是字符串常量区变量，地址是一样的，即用equals为true，用” = = “也为true。<br>    但是     String a =new String( “a”);       String b = new String( “a”);      这样是定义了两个堆内存对象，只能equals，不能 “ == “</p>
+<p>（1）int与Integer、new Integer()进行= =比较时，结果永远为true<br>（2）Integer与new Integer()进行= =比较时，结果永远为false<br>（3）Integer与Integer进行==比较时，看范围；在大于等于-128小于等于127的范围内为true，在此范围外为false。<br><br /></p>
+<p><strong>Java中的四类八种基本数据类型</strong><br>  第一类：整数类型  byte short int long<br> 第二类：浮点型  float double<br> 第三类：逻辑型  boolean(它只有两个值可取true false)<br>  第四类：字符型  char</p>
+<p><br /><br /><br /></p>
+<h2 id="3、面向对象的四大特性"><a href="#3、面向对象的四大特性" class="headerlink" title="3、面向对象的四大特性"></a>3、面向对象的四大特性</h2><p><a href="https://www.cnblogs.com/msn-z/p/7802576.html">https://www.cnblogs.com/msn-z/p/7802576.html</a></p>
+<p><br /><br /><br /></p>
+<h2 id="4、数组、链表、红黑树"><a href="#4、数组、链表、红黑树" class="headerlink" title="4、数组、链表、红黑树"></a>4、数组、链表、红黑树</h2><p><strong>数组：</strong><br><strong>查询快：</strong> 数组的地址是连续的，通过首地址和索引可以快速查找某个元素<br><strong>增删慢：</strong> 数组的长度是固定的，增删的时候其实是创建了一个新的数组，把仍然保存的元素复制到新数组中，原数组会在内存中被销毁（垃圾回收）</p>
+<p><strong>链表：</strong><br><strong>查询慢：</strong> 链表中的地址不是连续的，每次查询元素都必须从头开始查询<br><strong>增删快：</strong> 链表的结构，增删某一元素对整体结构没有影响，所以增删快<br><img src="https://img-blog.csdnimg.cn/20200907212158907.png#pic_center" alt="在这里插入图片描述"><br>链表还分为单向和双向，双向链表是有序的<br><img src="https://img-blog.csdnimg.cn/20200907212436721.png#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>红黑树：</strong><br><img src="https://img-blog.csdnimg.cn/20200907213841600.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200907213914400.png#pic_center" alt="在这里插入图片描述"><br><br /><br /><br /></p>
+<h2 id="5、List、Set、Collection、Map的区别和联系"><a href="#5、List、Set、Collection、Map的区别和联系" class="headerlink" title="5、List、Set、Collection、Map的区别和联系"></a>5、List、Set、Collection、Map的区别和联系</h2><p><img src="https://img-blog.csdnimg.cn/20210304175255199.png" alt="在这里插入图片描述"></p>
+<p><a href="https://blog.csdn.net/qq_44863974/article/details/95803762">https://blog.csdn.net/qq_44863974/article/details/95803762</a></p>
+<p><a href="https://blog.csdn.net/qq_36520235/article/details/82417949">https://blog.csdn.net/qq_36520235/article/details/82417949</a></p>
+<p><strong>Collection</strong>：Java.util下的一个接口，是各种集合结构的父接口，List和Set是继承自它的子接口，Collection是最基本的集合接口，Java SDK中不提供直接继承自Collection的类，而是提供继承自它子接口的类，如List和Set。所有的Collection类都支持一个Iterator()方法来遍历。</p>
+<p><strong>List</strong>：List接口是有序的，会精确的将元素插入到指定的位置（允许有相同元素）。用户能够使用索引（元素在List中的位置，类似于数组下标）来访问List中的元素。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>ArrayList</strong>：List接口实现类，实现可变大小的数组，允许所有的元素，底层用数组实现，可以随机访问（访问效率高，插入和删除效率低），不是同步的，也就是没有同步方法，线程不安全。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>LinkedList</strong>：List接口实现类，允许null元素，通常在首部或者尾部操作，所以常被使用做堆栈（Stack）、队列（Queue）和双向队列（Deque），底层用链表实现，插入删除效率高，访问效率低，不是同步的，也就是没有同步方法，线程不安全。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Vector</strong>：List接口实现类，类似于ArrayList，底层用数组实现，但Vector是同步的，线程安全（Stack继承自Vector）。</p>
+<br/>
+
+<p><strong>Set</strong>:是一种不包含重复元素的Collection接口，只关心元素是否属于Set（不允许有相同元素）,而不关心它的顺序。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>HashSet</strong>：Set接口实现类，不能有重复元素，底层使用HashMap实现，是为快速查找设计的Set，存入HashSet的对象必须定义HashCode()。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>LinkedHashSet</strong>：继承自HashSet，具有HashSet的查询速度，底层使用链表实现（维护元素的插入次序），于是在使用迭代器遍历Set时，结果会按元素插入的次序显示。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>TreeSet</strong>：Set接口实现类，保存次序的Set，底层使用树结构实现，使用它可以从Set中提取有序的序列。</p>
+<br/>
+
+<p><strong>Map</strong>：是键值对映射集合，且为一一映射，键不能重复，值可以，所以是用键来索引值（即此接口实现Key到Value的映射，一个Map中不能包含相同的Key，但可以包含相同的Value，每个Key只能映射一个Value）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>HashTable</strong>：Map接口实现类，实现了一个Key-Value的哈希表，不能存储null值，每一个非null元素都可以作为Key或者Value，是同步的，也是线程安全的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>HashMap</strong>：可以存储null值，不是同步的，也不是线程安全的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>ConcurrentHashMap</strong>:线程安全。<br><br /><br><img src="https://img-blog.csdnimg.cn/20200909151021910.png#pic_center" alt="在这里插入图片描述"><br>JDK1.9以后（还没用过）List、Set、Map新增了一个静态方法of，但用of返回集合后就不能再添加新的元素，并且Set、Map不能有重复元素：<br><img src="https://img-blog.csdnimg.cn/2020091215271458.png#pic_center" alt="在这里插入图片描述"><br><br /><br /><br /></p>
+<h2 id="6、异常产生的过程解析"><a href="#6、异常产生的过程解析" class="headerlink" title="6、异常产生的过程解析"></a>6、异常产生的过程解析</h2><p><img src="https://img-blog.csdnimg.cn/20200913105703846.png#pic_center" alt="在这里插入图片描述"></p>
+<p>大致分成以下步骤：<br>    1、JVM创建一个异常对象，里面包括<strong>异常产生的位置，异常内容，异常原因</strong><br>    2、在产生异常的方法中如果没有异常处理逻辑，就会把异常抛出到调用该方法的方法中，如果都没有异常处理逻辑，最后会抛出给JVM<br>    3、JVM会把异常对象用红色字体打印在控制台，并终止当前正在进行的JAVA程序（中断处理）</p>
+<p><br /><br /><br /></p>
+<h2 id="7、try-catch注意事项"><a href="#7、try-catch注意事项" class="headerlink" title="7、try catch注意事项"></a>7、try catch注意事项</h2><p>1、如果有多个catch并且捕获的异常有子父类的关系，子类必须写在上面，否则会报错<br>2、如果finally中有return语句，运行时永远返回finally中的结果，避免该情况<br>3、子父类异常：<br><img src="https://img-blog.csdnimg.cn/20200913143126887.png#pic_center" alt="在这里插入图片描述"></p>
+<p><br /><br /><br /></p>
+<h2 id="8、自定义异常："><a href="#8、自定义异常：" class="headerlink" title="8、自定义异常："></a>8、自定义异常：</h2><p><img src="https://img-blog.csdnimg.cn/20200913143537117.png#pic_center" alt="在这里插入图片描述"><br><br /><br /><br /></p>
+<h2 id="9、多线程："><a href="#9、多线程：" class="headerlink" title="9、多线程："></a>9、多线程：</h2><p>1、通过Thread扩展类实现多线程</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里面需要重写run方法</span></span><br><span class="line"><span class="comment">并且在main方法中new一个对象，调用该对象的start()方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、通过Runnable接口实现多线程</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunnableImpl</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里面需要重写run方法</span></span><br><span class="line"><span class="comment">并且在main方法中new一个对象Runnable接口对象run</span></span><br><span class="line"><span class="comment">再new一个Thread类对象 Thread t = new Thread(run);</span></span><br><span class="line"><span class="comment">再调用t.start()方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、实现Runnable接口创建多线程的好处：<br><img src="https://img-blog.csdnimg.cn/20200914220723420.png#pic_center" alt="在这里插入图片描述"><br>4、通过匿名内部类实现线程创建：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200914221024882.png#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">匿名内部类的创建格式为： <span class="keyword">new</span> 父类构造器（参数列表）|实现接口（）&#123;...&#125;       </span><br><span class="line">使用匿名内部类时，必须继承一个类或实现一个接口       </span><br><span class="line">匿名内部类由于没有名字，因此不能定义构造函数       </span><br><span class="line">匿名内部类中不能含有静态成员变量和静态方法</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//类中的main方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">	<span class="comment">//1、用Thread</span></span><br><span class="line">	<span class="comment">//线程的父类是Thread</span></span><br><span class="line">	<span class="keyword">new</span> Thread()&#123;</span><br><span class="line">		<span class="comment">//重写run方法，设置线程任务</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;...&#125;.start();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//2、用Runnable接口</span></span><br><span class="line">	Runnable r = <span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">		<span class="comment">//重写run方法，设置线程任务</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;...&#125;.start();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">new</span> Thread(r).start();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//简化上面的方法，直接把 new... 传进去</span></span><br><span class="line">	<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">		<span class="comment">//重写run方法，设置线程任务</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;...&#125;.start();</span><br><span class="line">	&#125;).start();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><br /><br /><br /></p>
+<h2 id="10、线程安全："><a href="#10、线程安全：" class="headerlink" title="10、线程安全："></a>10、线程安全：</h2><p>当同时有多个线程在执行时，如果不采取措施，很可能就会出现线程安全问题，解决线程安全问题有以下几种方法：<br /><br>1、使用同步代码块<br>    格式:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(锁对象)&#123;</span><br><span class="line">	可能会出现线程安全问题的代码（访问了共享资源的代码）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2020091810423447.png#pic_center" alt="在这里插入图片描述"><br><font color=red >同步技术保证了只能有一个线程在同步中执行共享数据，保证了安全<br>但程序频繁的判断、获取、释放锁降低了程序执行的效率</font><br><br /><br>2、使用同步方法<br>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">修饰符 <span class="keyword">synchronized</span> 返回值 方法名(参数列表)&#123;</span><br><span class="line">	可能会出现线程安全问题的代码（访问了共享资源的代码）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br />
+
+<p>3、使用Lock锁<br><img src="https://img-blog.csdnimg.cn/20200918112220123.png#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Lock l = ...; </span><br><span class="line">l.lock(); </span><br><span class="line"><span class="keyword">try</span> &#123; <span class="comment">// access the resource protected by this lock &#125; </span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">finally</span> &#123; l.unlock(); &#125; </span><br></pre></td></tr></table></figure>
+<p><font color=red >当在不同范围内发生锁定和解锁时，必须注意确保在锁定时执行的所有代码由try-finally或try-catch保护，以确保在必要时释放锁。</font></p>
+<br />
+
+<h2 id="11、等待与唤醒机制"><a href="#11、等待与唤醒机制" class="headerlink" title="11、等待与唤醒机制"></a>11、等待与唤醒机制</h2><br />
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">导致当前线程等待，直到另一个线程调用该对象的 <span class="title">notify</span><span class="params">()</span>方法或 <span class="title">notifyAll</span><span class="params">()</span>方法。 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout)</span> </span></span><br><span class="line"><span class="function">导致当前线程等待，直到另一个线程调用 <span class="title">notify</span><span class="params">()</span>方法或该对象的 <span class="title">notifyAll</span><span class="params">()</span>方法，或者指定的时间已过。 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">唤醒正在等待对象监视器的单个线程。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">唤醒正在等待对象监视器的所有线程。 </span></span><br></pre></td></tr></table></figure>
+<p>多用于线程间的通信，使得多个线程可以符合我们的预期 有序的执行。 </p>
+<br />
+
+<h2 id="12、线程池"><a href="#12、线程池" class="headerlink" title="12、线程池"></a>12、线程池</h2><p><a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html">线程池描述</a></p>
+<p>线程池：容器–&gt;集合（ArrayList，Hashset，**LinkedList<Thread>**，HashMap）<br><img src="https://img-blog.csdnimg.cn/20200927154626349.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
+<h2 id="13、lambda表达式"><a href="#13、lambda表达式" class="headerlink" title="13、lambda表达式"></a>13、lambda表达式</h2><p><strong>面向对象思想：做一件事情，找一个可以做这个事情的对象，调用该对象的方法，完成事情<br>函数式编程思想：只要能获取到结果，谁去做的，怎么做的都不重要，重视结果 不看重过程</strong><br><br/><br><strong>lambda标准格式：</strong><br>lambda表达式省去了面向对象的条条框框，格式由3部分组成：<br>    <strong>一些参数、一个箭头、一段代码</strong><br>    <img src="https://img-blog.csdnimg.cn/20200927161204242.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200927164531938.png#pic_center" alt="在这里插入图片描述"><br><strong>使用lambda表达式的前提：</strong><br><img src="https://img-blog.csdnimg.cn/20200927170102430.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="14、File类"><a href="#14、File类" class="headerlink" title="14、File类"></a>14、File类</h2><p><strong>遍历目录：</strong><br><img src="https://img-blog.csdnimg.cn/20200928163830603.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
+<h2 id="15、递归"><a href="#15、递归" class="headerlink" title="15、递归"></a>15、递归</h2><p><strong>例1：</strong><br><img src="https://img-blog.csdnimg.cn/20201005200723428.png#pic_center" alt="在这里插入图片描述"><br>代码：<br><img src="https://img-blog.csdnimg.cn/20201005200758253.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
+<p><strong>例2：</strong><br><img src="https://img-blog.csdnimg.cn/20201005201126657.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201008205417911.png#pic_center" alt="在这里插入图片描述"></p>
+<p>代码:<br><img src="https://img-blog.csdnimg.cn/20201008205542528.png#pic_center" alt="在这里插入图片描述"><br><br /><br /></p>
+<h2 id="16、IO流"><a href="#16、IO流" class="headerlink" title="16、IO流"></a>16、IO流</h2><p><img src="https://img-blog.csdnimg.cn/20201009151859471.png#pic_center" alt="在这里插入图片描述"><br>一个中文：GBK编码占用两个字节，UTF-8编码占用三个字节<br><br /><br>字符输出流写入硬盘与字节输出流的一个区别是：<br>字节输出流直接使用write()方法把数据写入硬盘中<br>字符输出流使用write()方法是是把字符转换为字节，将字节写入内存缓冲区，需要再使用flush()方法    把内存缓冲区的数据刷新到文件中（colse方法使用时也会将内存缓冲区的数据刷新到文件中）<br><img src="https://img-blog.csdnimg.cn/2020100920265897.png#pic_center" alt="在这里插入图片描述"></p>
+<br />
+
+<p>字节字符流的续写和换行：<br><img src="https://img-blog.csdnimg.cn/20201009203349753.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
+<p>在JDK7之前使用try catch处理流的异常：<br><img src="https://img-blog.csdnimg.cn/20201009204256545.png#pic_center" alt="在这里插入图片描述"></p>
+<p>JDK7的新特性：<br><img src="https://img-blog.csdnimg.cn/20201009204638490.png#pic_center" alt="在这里插入图片描述"><br>JDK9的新特性：<br><img src="https://img-blog.csdnimg.cn/20201009204919980.png#pic_center" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>学习记录</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>探索LRU常用数据结构—LinkedHashMap的hash冲突问题</title>
+    <url>/2021/04/18/LRU%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84LinkedHashMap%E7%9A%84hash%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98.html</url>
+    <content><![CDATA[<h2 id="LRU算法是什么"><a href="#LRU算法是什么" class="headerlink" title="LRU算法是什么"></a>LRU算法是什么</h2><p>LRU（Least recently used，最近最少使用）是一种缓存经常用到的算法，根据数据的历史访问记录来进行淘汰数据，其核心思想是“<strong>如果数据最近被访问过，那么将来被访问的几率也更高</strong>”。</p>
+<h2 id="利用LinkedHashMap实现简单的LRU"><a href="#利用LinkedHashMap实现简单的LRU" class="headerlink" title="利用LinkedHashMap实现简单的LRU"></a>利用LinkedHashMap实现简单的LRU</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseLinkedHashMapCache</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cacheSize;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UseLinkedHashMapCache</span><span class="params">(<span class="keyword">int</span> cacheSize)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 参数：</span></span><br><span class="line"><span class="comment">         * initialCapacity – 初始容量</span></span><br><span class="line"><span class="comment">         * loadFactor – 负载因子</span></span><br><span class="line"><span class="comment">         * accessOrder – 排序模式 - 访问顺序为真，插入顺序为假</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">super</span>(<span class="number">16</span>, <span class="number">0.75f</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.cacheSize = cacheSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>利用LinkedHashMap来实现LRU很简单，但是在写demo的时候我产生了一个疑惑：<strong>LinkedHashMap在产生hash冲突时如果通过链地址法来解决，那么LinkedHashMap中的双向链表的顺序是怎么样的呢？</strong></p>
+<p>产生疑惑，动手解决，通过上面那个demo试一下就知道了：</p>
+<p>首先先试一下demo是否能按照我们想的正常淘汰元素:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UseLinkedHashMapCache&lt;String, Integer&gt; mapCache = <span class="keyword">new</span> UseLinkedHashMapCache&lt;&gt;(<span class="number">3</span>);</span><br><span class="line">        mapCache.put(<span class="string">&quot;Aaa&quot;</span>, <span class="number">4</span>);</span><br><span class="line">        mapCache.put(<span class="string">&quot;BB&quot;</span>, <span class="number">6</span>);</span><br><span class="line">        mapCache.put(<span class="string">&quot;3&quot;</span>, <span class="number">2</span>);</span><br><span class="line">        mapCache.put(<span class="string">&quot;4&quot;</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        Iterator&lt;Map.Entry&lt;Integer, Integer&gt;&gt; it = mapCache.entrySet().iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">            Map.Entry&lt;Integer, Integer&gt; entry = it.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;value : &quot;</span> + entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果是正常的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">value : <span class="number">6</span></span><br><span class="line">value : <span class="number">2</span></span><br><span class="line">value : <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>接下来让我们试试改动一下key，让它产生hash冲突：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mapCache.put(<span class="string">&quot;Aa&quot;</span>, <span class="number">4</span>); <span class="comment">// &quot;Aa&quot;.hashCode()  2112</span></span><br><span class="line">mapCache.put(<span class="string">&quot;BB&quot;</span>, <span class="number">6</span>); <span class="comment">// &quot;BB&quot;.hashCode()  2112</span></span><br><span class="line">mapCache.put(<span class="string">&quot;3&quot;</span>, <span class="number">2</span>);</span><br><span class="line">mapCache.put(<span class="string">&quot;4&quot;</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果也是一样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">value : <span class="number">6</span></span><br><span class="line">value : <span class="number">2</span></span><br><span class="line">value : <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>尝试多个hash冲突：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mapCache.put(<span class="string">&quot;Aa&quot;</span>, <span class="number">4</span>);</span><br><span class="line">mapCache.put(<span class="string">&quot;BB&quot;</span>, <span class="number">6</span>);</span><br><span class="line">mapCache.put(<span class="string">&quot;Bb&quot;</span>, <span class="number">2</span>); <span class="comment">// 2144</span></span><br><span class="line">mapCache.put(<span class="string">&quot;CC&quot;</span>, <span class="number">3</span>); <span class="comment">// 2144</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">value : <span class="number">6</span></span><br><span class="line">value : <span class="number">2</span></span><br><span class="line">value : <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>经过多次测试及查看源码，<strong>LinkedHashMap就是维护了一个双向链表来保证可以按照插入顺序访问及访问顺序访问，并且在value中每个node都保存了key的值，用于在删除链表节点时可以顺便把key的值删掉。</strong></p>
+]]></content>
+      <categories>
+        <category>学习记录</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>LinkedHashMap</tag>
+        <tag>LRU</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JVM系统整理</title>
     <url>/2021/05/21/JVM%E7%B3%BB%E7%BB%9F%E6%95%B4%E7%90%86.html</url>
     <content><![CDATA[<p><img src="https://img-blog.csdnimg.cn/20210320103006245.png" alt="在这里插入图片描述"></p>
@@ -395,89 +523,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java学习记录</title>
-    <url>/2021/04/08/Java%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95.html</url>
-    <content><![CDATA[<h2 id="1、动态代理与反射"><a href="#1、动态代理与反射" class="headerlink" title="1、动态代理与反射"></a>1、动态代理与反射</h2><p><a href="https://www.cnblogs.com/jacksontao/p/8552357.html">https://www.cnblogs.com/jacksontao/p/8552357.html</a><br>对于反射：讲的通俗一点的话就是，对于jvm来说，.java文件必须要先编译为.class文件才能够被jvm执行，所以在编译为.class文件的过程中，对象的类型都会被指定好，比如说 User user。那么如果说我想在代码运行的过程中获取到对象的类型呢？或者说程序在运行过程中如何载入一个特定的类呢？这就涉及到了java的反射机制了，反射提供了一套能够让我们在代码运行时也能获取到类型属性的方法。<br>而动态代理，利用java反射机制，动态的生成了一个代理类，直接调用代理方法即可。</p>
-<p><br /><br /></p>
-<span id="more"></span>
-
-<h2 id="2、int和Integer的区别"><a href="#2、int和Integer的区别" class="headerlink" title="2、int和Integer的区别"></a>2、int和Integer的区别</h2><p><a href="https://www.cnblogs.com/guodongdidi/p/6953217.html">https://www.cnblogs.com/guodongdidi/p/6953217.html</a><br>自动装箱与自动拆箱<br><br /></p>
-<p>String a = “a”;    String b = “a”;    这样定义的a和b指向的是字符串常量区变量，地址是一样的，即用equals为true，用” = = “也为true。<br>    但是     String a =new String( “a”);       String b = new String( “a”);      这样是定义了两个堆内存对象，只能equals，不能 “ == “</p>
-<p>（1）int与Integer、new Integer()进行= =比较时，结果永远为true<br>（2）Integer与new Integer()进行= =比较时，结果永远为false<br>（3）Integer与Integer进行==比较时，看范围；在大于等于-128小于等于127的范围内为true，在此范围外为false。<br><br /></p>
-<p><strong>Java中的四类八种基本数据类型</strong><br>  第一类：整数类型  byte short int long<br> 第二类：浮点型  float double<br> 第三类：逻辑型  boolean(它只有两个值可取true false)<br>  第四类：字符型  char</p>
-<p><br /><br /><br /></p>
-<h2 id="3、面向对象的四大特性"><a href="#3、面向对象的四大特性" class="headerlink" title="3、面向对象的四大特性"></a>3、面向对象的四大特性</h2><p><a href="https://www.cnblogs.com/msn-z/p/7802576.html">https://www.cnblogs.com/msn-z/p/7802576.html</a></p>
-<p><br /><br /><br /></p>
-<h2 id="4、数组、链表、红黑树"><a href="#4、数组、链表、红黑树" class="headerlink" title="4、数组、链表、红黑树"></a>4、数组、链表、红黑树</h2><p><strong>数组：</strong><br><strong>查询快：</strong> 数组的地址是连续的，通过首地址和索引可以快速查找某个元素<br><strong>增删慢：</strong> 数组的长度是固定的，增删的时候其实是创建了一个新的数组，把仍然保存的元素复制到新数组中，原数组会在内存中被销毁（垃圾回收）</p>
-<p><strong>链表：</strong><br><strong>查询慢：</strong> 链表中的地址不是连续的，每次查询元素都必须从头开始查询<br><strong>增删快：</strong> 链表的结构，增删某一元素对整体结构没有影响，所以增删快<br><img src="https://img-blog.csdnimg.cn/20200907212158907.png#pic_center" alt="在这里插入图片描述"><br>链表还分为单向和双向，双向链表是有序的<br><img src="https://img-blog.csdnimg.cn/20200907212436721.png#pic_center" alt="在这里插入图片描述"></p>
-<p><strong>红黑树：</strong><br><img src="https://img-blog.csdnimg.cn/20200907213841600.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200907213914400.png#pic_center" alt="在这里插入图片描述"><br><br /><br /><br /></p>
-<h2 id="5、List、Set、Collection、Map的区别和联系"><a href="#5、List、Set、Collection、Map的区别和联系" class="headerlink" title="5、List、Set、Collection、Map的区别和联系"></a>5、List、Set、Collection、Map的区别和联系</h2><p><img src="https://img-blog.csdnimg.cn/20210304175255199.png" alt="在这里插入图片描述"></p>
-<p><a href="https://blog.csdn.net/qq_44863974/article/details/95803762">https://blog.csdn.net/qq_44863974/article/details/95803762</a></p>
-<p><a href="https://blog.csdn.net/qq_36520235/article/details/82417949">https://blog.csdn.net/qq_36520235/article/details/82417949</a></p>
-<p><strong>Collection</strong>：Java.util下的一个接口，是各种集合结构的父接口，List和Set是继承自它的子接口，Collection是最基本的集合接口，Java SDK中不提供直接继承自Collection的类，而是提供继承自它子接口的类，如List和Set。所有的Collection类都支持一个Iterator()方法来遍历。</p>
-<p><strong>List</strong>：List接口是有序的，会精确的将元素插入到指定的位置（允许有相同元素）。用户能够使用索引（元素在List中的位置，类似于数组下标）来访问List中的元素。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>ArrayList</strong>：List接口实现类，实现可变大小的数组，允许所有的元素，底层用数组实现，可以随机访问（访问效率高，插入和删除效率低），不是同步的，也就是没有同步方法，线程不安全。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>LinkedList</strong>：List接口实现类，允许null元素，通常在首部或者尾部操作，所以常被使用做堆栈（Stack）、队列（Queue）和双向队列（Deque），底层用链表实现，插入删除效率高，访问效率低，不是同步的，也就是没有同步方法，线程不安全。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Vector</strong>：List接口实现类，类似于ArrayList，底层用数组实现，但Vector是同步的，线程安全（Stack继承自Vector）。</p>
-<br/>
-
-<p><strong>Set</strong>:是一种不包含重复元素的Collection接口，只关心元素是否属于Set（不允许有相同元素）,而不关心它的顺序。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>HashSet</strong>：Set接口实现类，不能有重复元素，底层使用HashMap实现，是为快速查找设计的Set，存入HashSet的对象必须定义HashCode()。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>LinkedHashSet</strong>：继承自HashSet，具有HashSet的查询速度，底层使用链表实现（维护元素的插入次序），于是在使用迭代器遍历Set时，结果会按元素插入的次序显示。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>TreeSet</strong>：Set接口实现类，保存次序的Set，底层使用树结构实现，使用它可以从Set中提取有序的序列。</p>
-<br/>
-
-<p><strong>Map</strong>：是键值对映射集合，且为一一映射，键不能重复，值可以，所以是用键来索引值（即此接口实现Key到Value的映射，一个Map中不能包含相同的Key，但可以包含相同的Value，每个Key只能映射一个Value）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>HashTable</strong>：Map接口实现类，实现了一个Key-Value的哈希表，不能存储null值，每一个非null元素都可以作为Key或者Value，是同步的，也是线程安全的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>HashMap</strong>：可以存储null值，不是同步的，也不是线程安全的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>ConcurrentHashMap</strong>:线程安全。<br><br /><br><img src="https://img-blog.csdnimg.cn/20200909151021910.png#pic_center" alt="在这里插入图片描述"><br>JDK1.9以后（还没用过）List、Set、Map新增了一个静态方法of，但用of返回集合后就不能再添加新的元素，并且Set、Map不能有重复元素：<br><img src="https://img-blog.csdnimg.cn/2020091215271458.png#pic_center" alt="在这里插入图片描述"><br><br /><br /><br /></p>
-<h2 id="6、异常产生的过程解析"><a href="#6、异常产生的过程解析" class="headerlink" title="6、异常产生的过程解析"></a>6、异常产生的过程解析</h2><p><img src="https://img-blog.csdnimg.cn/20200913105703846.png#pic_center" alt="在这里插入图片描述"></p>
-<p>大致分成以下步骤：<br>    1、JVM创建一个异常对象，里面包括<strong>异常产生的位置，异常内容，异常原因</strong><br>    2、在产生异常的方法中如果没有异常处理逻辑，就会把异常抛出到调用该方法的方法中，如果都没有异常处理逻辑，最后会抛出给JVM<br>    3、JVM会把异常对象用红色字体打印在控制台，并终止当前正在进行的JAVA程序（中断处理）</p>
-<p><br /><br /><br /></p>
-<h2 id="7、try-catch注意事项"><a href="#7、try-catch注意事项" class="headerlink" title="7、try catch注意事项"></a>7、try catch注意事项</h2><p>1、如果有多个catch并且捕获的异常有子父类的关系，子类必须写在上面，否则会报错<br>2、如果finally中有return语句，运行时永远返回finally中的结果，避免该情况<br>3、子父类异常：<br><img src="https://img-blog.csdnimg.cn/20200913143126887.png#pic_center" alt="在这里插入图片描述"></p>
-<p><br /><br /><br /></p>
-<h2 id="8、自定义异常："><a href="#8、自定义异常：" class="headerlink" title="8、自定义异常："></a>8、自定义异常：</h2><p><img src="https://img-blog.csdnimg.cn/20200913143537117.png#pic_center" alt="在这里插入图片描述"><br><br /><br /><br /></p>
-<h2 id="9、多线程："><a href="#9、多线程：" class="headerlink" title="9、多线程："></a>9、多线程：</h2><p>1、通过Thread扩展类实现多线程</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里面需要重写run方法</span></span><br><span class="line"><span class="comment">并且在main方法中new一个对象，调用该对象的start()方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、通过Runnable接口实现多线程</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunnableImpl</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里面需要重写run方法</span></span><br><span class="line"><span class="comment">并且在main方法中new一个对象Runnable接口对象run</span></span><br><span class="line"><span class="comment">再new一个Thread类对象 Thread t = new Thread(run);</span></span><br><span class="line"><span class="comment">再调用t.start()方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>3、实现Runnable接口创建多线程的好处：<br><img src="https://img-blog.csdnimg.cn/20200914220723420.png#pic_center" alt="在这里插入图片描述"><br>4、通过匿名内部类实现线程创建：</p>
-<p><img src="https://img-blog.csdnimg.cn/20200914221024882.png#pic_center" alt="在这里插入图片描述"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">匿名内部类的创建格式为： <span class="keyword">new</span> 父类构造器（参数列表）|实现接口（）&#123;...&#125;       </span><br><span class="line">使用匿名内部类时，必须继承一个类或实现一个接口       </span><br><span class="line">匿名内部类由于没有名字，因此不能定义构造函数       </span><br><span class="line">匿名内部类中不能含有静态成员变量和静态方法</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//类中的main方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">	<span class="comment">//1、用Thread</span></span><br><span class="line">	<span class="comment">//线程的父类是Thread</span></span><br><span class="line">	<span class="keyword">new</span> Thread()&#123;</span><br><span class="line">		<span class="comment">//重写run方法，设置线程任务</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;...&#125;.start();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//2、用Runnable接口</span></span><br><span class="line">	Runnable r = <span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">		<span class="comment">//重写run方法，设置线程任务</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;...&#125;.start();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">new</span> Thread(r).start();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//简化上面的方法，直接把 new... 传进去</span></span><br><span class="line">	<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">		<span class="comment">//重写run方法，设置线程任务</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;...&#125;.start();</span><br><span class="line">	&#125;).start();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><br /><br /><br /></p>
-<h2 id="10、线程安全："><a href="#10、线程安全：" class="headerlink" title="10、线程安全："></a>10、线程安全：</h2><p>当同时有多个线程在执行时，如果不采取措施，很可能就会出现线程安全问题，解决线程安全问题有以下几种方法：<br /><br>1、使用同步代码块<br>    格式:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(锁对象)&#123;</span><br><span class="line">	可能会出现线程安全问题的代码（访问了共享资源的代码）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/2020091810423447.png#pic_center" alt="在这里插入图片描述"><br><font color=red >同步技术保证了只能有一个线程在同步中执行共享数据，保证了安全<br>但程序频繁的判断、获取、释放锁降低了程序执行的效率</font><br><br /><br>2、使用同步方法<br>格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">修饰符 <span class="keyword">synchronized</span> 返回值 方法名(参数列表)&#123;</span><br><span class="line">	可能会出现线程安全问题的代码（访问了共享资源的代码）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br />
-
-<p>3、使用Lock锁<br><img src="https://img-blog.csdnimg.cn/20200918112220123.png#pic_center" alt="在这里插入图片描述"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Lock l = ...; </span><br><span class="line">l.lock(); </span><br><span class="line"><span class="keyword">try</span> &#123; <span class="comment">// access the resource protected by this lock &#125; </span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">finally</span> &#123; l.unlock(); &#125; </span><br></pre></td></tr></table></figure>
-<p><font color=red >当在不同范围内发生锁定和解锁时，必须注意确保在锁定时执行的所有代码由try-finally或try-catch保护，以确保在必要时释放锁。</font></p>
-<br />
-
-<h2 id="11、等待与唤醒机制"><a href="#11、等待与唤醒机制" class="headerlink" title="11、等待与唤醒机制"></a>11、等待与唤醒机制</h2><br />
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">导致当前线程等待，直到另一个线程调用该对象的 <span class="title">notify</span><span class="params">()</span>方法或 <span class="title">notifyAll</span><span class="params">()</span>方法。 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout)</span> </span></span><br><span class="line"><span class="function">导致当前线程等待，直到另一个线程调用 <span class="title">notify</span><span class="params">()</span>方法或该对象的 <span class="title">notifyAll</span><span class="params">()</span>方法，或者指定的时间已过。 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">唤醒正在等待对象监视器的单个线程。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">唤醒正在等待对象监视器的所有线程。 </span></span><br></pre></td></tr></table></figure>
-<p>多用于线程间的通信，使得多个线程可以符合我们的预期 有序的执行。 </p>
-<br />
-
-<h2 id="12、线程池"><a href="#12、线程池" class="headerlink" title="12、线程池"></a>12、线程池</h2><p><a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html">线程池描述</a></p>
-<p>线程池：容器–&gt;集合（ArrayList，Hashset，**LinkedList<Thread>**，HashMap）<br><img src="https://img-blog.csdnimg.cn/20200927154626349.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
-<h2 id="13、lambda表达式"><a href="#13、lambda表达式" class="headerlink" title="13、lambda表达式"></a>13、lambda表达式</h2><p><strong>面向对象思想：做一件事情，找一个可以做这个事情的对象，调用该对象的方法，完成事情<br>函数式编程思想：只要能获取到结果，谁去做的，怎么做的都不重要，重视结果 不看重过程</strong><br><br/><br><strong>lambda标准格式：</strong><br>lambda表达式省去了面向对象的条条框框，格式由3部分组成：<br>    <strong>一些参数、一个箭头、一段代码</strong><br>    <img src="https://img-blog.csdnimg.cn/20200927161204242.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200927164531938.png#pic_center" alt="在这里插入图片描述"><br><strong>使用lambda表达式的前提：</strong><br><img src="https://img-blog.csdnimg.cn/20200927170102430.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="14、File类"><a href="#14、File类" class="headerlink" title="14、File类"></a>14、File类</h2><p><strong>遍历目录：</strong><br><img src="https://img-blog.csdnimg.cn/20200928163830603.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
-<h2 id="15、递归"><a href="#15、递归" class="headerlink" title="15、递归"></a>15、递归</h2><p><strong>例1：</strong><br><img src="https://img-blog.csdnimg.cn/20201005200723428.png#pic_center" alt="在这里插入图片描述"><br>代码：<br><img src="https://img-blog.csdnimg.cn/20201005200758253.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
-<p><strong>例2：</strong><br><img src="https://img-blog.csdnimg.cn/20201005201126657.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201008205417911.png#pic_center" alt="在这里插入图片描述"></p>
-<p>代码:<br><img src="https://img-blog.csdnimg.cn/20201008205542528.png#pic_center" alt="在这里插入图片描述"><br><br /><br /></p>
-<h2 id="16、IO流"><a href="#16、IO流" class="headerlink" title="16、IO流"></a>16、IO流</h2><p><img src="https://img-blog.csdnimg.cn/20201009151859471.png#pic_center" alt="在这里插入图片描述"><br>一个中文：GBK编码占用两个字节，UTF-8编码占用三个字节<br><br /><br>字符输出流写入硬盘与字节输出流的一个区别是：<br>字节输出流直接使用write()方法把数据写入硬盘中<br>字符输出流使用write()方法是是把字符转换为字节，将字节写入内存缓冲区，需要再使用flush()方法    把内存缓冲区的数据刷新到文件中（colse方法使用时也会将内存缓冲区的数据刷新到文件中）<br><img src="https://img-blog.csdnimg.cn/2020100920265897.png#pic_center" alt="在这里插入图片描述"></p>
-<br />
-
-<p>字节字符流的续写和换行：<br><img src="https://img-blog.csdnimg.cn/20201009203349753.png#pic_center" alt="在这里插入图片描述"><br><br /></p>
-<p>在JDK7之前使用try catch处理流的异常：<br><img src="https://img-blog.csdnimg.cn/20201009204256545.png#pic_center" alt="在这里插入图片描述"></p>
-<p>JDK7的新特性：<br><img src="https://img-blog.csdnimg.cn/20201009204638490.png#pic_center" alt="在这里插入图片描述"><br>JDK9的新特性：<br><img src="https://img-blog.csdnimg.cn/20201009204919980.png#pic_center" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>学习记录</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于脏读、不可重复读、幻读以及Mysql的隔离级别</title>
     <url>/2021/06/09/Mysql%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.html</url>
     <content><![CDATA[<hr>
@@ -596,6 +641,48 @@
       </tags>
   </entry>
   <entry>
+    <title>线程池任务提交方法submit()和execute()的区别</title>
+    <url>/2021/12/24/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95submit()%E5%92%8Cexcute()%E7%9A%84%E5%8C%BA%E5%88%AB.html</url>
+    <content><![CDATA[<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p><strong>返回值：</strong>execute() 没有返回值，submit() 有返回值Future，并且结合Callable任务指定泛型，可以通过future.get()拿到对应Callable返回的对象。</p>
+</li>
+<li><p><strong>接受的任务类型：</strong>execute() 方法只能接受Runnable类型，submit() 方法可以接受Runnable和Callable类型，但是因为Runnable类型的run方法返回值是void，所以future.get()的会是null。</p>
+</li>
+<li><p><strong>抛出异常：</strong> </p>
+<span id="more"></span>
+
+<ul>
+<li>execute中的是Runnable接口的实现，所以只能使用try、catch来捕获CheckedException，通过实现UncaughtExceptionHande接口处理UncheckedException，<strong>即和普通线程的处理方式完全一致。</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Runnable runnableTask = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    service.execute(runnableTask);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="C:\Users\kiros\AppData\Roaming\Typora\typora-user-images\image-20211225213059401.png" alt="image-20211225213059401"></p>
+<ul>
+<li>submit提交的无论是Runnable还是Callable任务，<strong>如果不调用future.get()都会吃掉异常，需要对异常进行捕获：</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    Future&lt;?&gt; future = service.submit(runnableTask);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        System.out.println(future.get());</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        System.err.println(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行结果：</li>
+</ul>
+<p><img src="C:\Users\kiros\AppData\Roaming\Typora\typora-user-images\image-20211225214838630.png" alt="image-20211225214838630"></p>
+</li>
+</ol>
+<p>​        </p>
+<p>​        </p>
+<h2 id="demo代码"><a href="#demo代码" class="headerlink" title="demo代码"></a>demo代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService service = Executors.newFixedThreadPool(<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">        Runnable runnableTask = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        Callable&lt;String&gt; callableTask = <span class="keyword">new</span> Callable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;callableTask---当前线程:&quot;</span> + Thread.currentThread().getName();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line"><span class="comment">//            service.execute(runnableTask);</span></span><br><span class="line">            Future&lt;?&gt; future = service.submit(runnableTask);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(future.get());</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.err.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        service.shutdown();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>学习记录</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>线程池</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于幂等问题</title>
     <url>/2021/11/24/%E5%B9%82%E7%AD%89%E6%80%A7%E9%97%AE%E9%A2%98.html</url>
     <content><![CDATA[<h2 id="幂等的作用"><a href="#幂等的作用" class="headerlink" title="幂等的作用"></a>幂等的作用</h2><p>无论是单机或者分布式系统都会遇到并发的问题，除了使用类似流量控制等的方法之外，当请求真正到达后端服务器之后，幂等设计就可以作为一种解决方案了。</p>
@@ -646,48 +733,6 @@
         <tag>Java</tag>
         <tag>分布式</tag>
         <tag>幂等</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线程池任务提交方法submit()和execute()的区别</title>
-    <url>/2021/12/24/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95submit()%E5%92%8Cexcute()%E7%9A%84%E5%8C%BA%E5%88%AB.html</url>
-    <content><![CDATA[<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p><strong>返回值：</strong>execute() 没有返回值，submit() 有返回值Future，并且结合Callable任务指定泛型，可以通过future.get()拿到对应Callable返回的对象。</p>
-</li>
-<li><p><strong>接受的任务类型：</strong>execute() 方法只能接受Runnable类型，submit() 方法可以接受Runnable和Callable类型，但是因为Runnable类型的run方法返回值是void，所以future.get()的会是null。</p>
-</li>
-<li><p><strong>抛出异常：</strong> </p>
-<span id="more"></span>
-
-<ul>
-<li>execute中的是Runnable接口的实现，所以只能使用try、catch来捕获CheckedException，通过实现UncaughtExceptionHande接口处理UncheckedException，<strong>即和普通线程的处理方式完全一致。</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Runnable runnableTask = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    service.execute(runnableTask);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<p><img src="C:\Users\kiros\AppData\Roaming\Typora\typora-user-images\image-20211225213059401.png" alt="image-20211225213059401"></p>
-<ul>
-<li>submit提交的无论是Runnable还是Callable任务，<strong>如果不调用future.get()都会吃掉异常，需要对异常进行捕获：</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    Future&lt;?&gt; future = service.submit(runnableTask);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        System.out.println(future.get());</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        System.err.println(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>运行结果：</li>
-</ul>
-<p><img src="C:\Users\kiros\AppData\Roaming\Typora\typora-user-images\image-20211225214838630.png" alt="image-20211225214838630"></p>
-</li>
-</ol>
-<p>​        </p>
-<p>​        </p>
-<h2 id="demo代码"><a href="#demo代码" class="headerlink" title="demo代码"></a>demo代码</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService service = Executors.newFixedThreadPool(<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">        Runnable runnableTask = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        Callable&lt;String&gt; callableTask = <span class="keyword">new</span> Callable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;callableTask---当前线程:&quot;</span> + Thread.currentThread().getName();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line"><span class="comment">//            service.execute(runnableTask);</span></span><br><span class="line">            Future&lt;?&gt; future = service.submit(runnableTask);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(future.get());</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.err.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        service.shutdown();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>学习记录</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>线程池</tag>
       </tags>
   </entry>
   <entry>
