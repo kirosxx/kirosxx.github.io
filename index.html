@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>超级妞妞生日扭蛋机</title>
+  <style>
+    :root {
+      --bg1: #ff8357;
+      --bg2: #ffd8c7;
+      --pink: #ff4f93;
+      --deep-pink: #dc2f78;
+      --accent: #ffd400;
+      --machine: #ff74b2;
+      --machine-dark: #f04c93;
+      --glass: #c7d8ff;
+      --text: #5a2a44;
+      --white: #fff;
+      --shadow: 0 16px 38px rgba(88, 61, 126, 0.3);
+      --panel: rgba(255, 255, 255, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(130% 80% at 50% -10%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.06) 0,
+        rgba(255, 255, 255, 0.06) 24px,
+        rgba(255, 255, 255, 0) 24px,
+        rgba(255, 255, 255, 0) 52px
+      );
+      opacity: .5;
+    }
+
+    .page {
+      width: min(430px, 100%);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+    }
+
+    .title {
+      margin: 4px 0 2px;
+      font-size: clamp(26px, 7.2vw, 34px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 4px 0 rgba(203, 87, 99, 0.45);
+    }
+
+    .kitty-bow {
+      width: 82px;
+      height: 46px;
+      position: relative;
+      margin-top: -4px;
+    }
+
+    .machine-head {
+      width: min(370px, 95vw);
+      border-radius: 16px;
+      padding: 10px 14px 12px;
+      background: linear-gradient(180deg, #8f63d9 0%, #7048c7 100%);
+      border: 4px solid #d7d8e6;
+      box-shadow: 0 8px 18px rgba(72, 40, 56, 0.28), inset 0 2px rgba(255, 255, 255, 0.45);
+      position: relative;
+    }
+
+    .machine-head::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 11px;
+      border: 2px solid rgba(255, 255, 255, 0.32);
+      pointer-events: none;
+    }
+
+    .year-tag {
+      margin: 0 0 6px;
+      text-align: center;
+      font-size: 14px;
+      color: #ffe27a;
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
+
+    .head-title {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(28px, 8vw, 36px);
+      font-weight: 900;
+      color: #ff8a00;
+      letter-spacing: 1px;
+      text-shadow: 0 2px #5f2f1e;
+    }
+
+    .head-title span {
+      color: #fff;
+    }
+
+    .kitty-bow::before,
+    .kitty-bow::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--pink);
+      top: 10px;
+      box-shadow: inset -5px -4px rgba(255, 255, 255, 0.24);
+    }
+
+    .kitty-bow::before { left: 0; transform: rotate(-18deg); }
+    .kitty-bow::after { right: 0; transform: rotate(18deg); }
+
+    .kitty-bow span {
+      position: absolute;
+      left: 50%;
+      top: 14px;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ff2e84;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .machine-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+
+    .machine {
+      width: min(370px, 95vw);
+      position: relative;
+      filter: drop-shadow(var(--shadow));
+      border-radius: 22px;
+      padding: 10px 10px 12px;
+      background: linear-gradient(180deg, #d9dcf2, #f4f6ff);
+      border: 3px solid #c5c9e4;
+    }
+
+    .dome {
+      height: 226px;
+      border-radius: 22px 22px 14px 14px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)),
+        radial-gradient(circle at 42% 18%, #f7fdff 0%, #dce8ff 40%, #9ab4ff 100%);
+      border: 8px solid #dce5ff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dome::before {
+      content: "";
+      position: absolute;
+      width: 72%;
+      height: 45%;
+      left: 14%;
+      top: 6%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+
+    .dome::after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 36px;
+      width: 54px;
+      height: 142px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+      transform: rotate(-18deg);
+      pointer-events: none;
+    }
+
+
+    .capsule {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: inset -8px -8px rgba(0, 0, 0, 0.12);
+      animation: float 2.8s ease-in-out infinite;
+    }
+
+    .c1 { left: 18px; top: 132px; background: #ff4fa7; animation-delay: .1s; }
+    .c2 { left: 56px; top: 88px; background: #ffffff; animation-delay: .4s; }
+    .c3 { left: 96px; top: 148px; background: #7096ff; animation-delay: .8s; }
+    .c4 { left: 130px; top: 74px; background: #ffffff; animation-delay: .3s; }
+    .c5 { left: 174px; top: 124px; background: #7096ff; animation-delay: .7s; }
+    .c6 { left: 214px; top: 66px; background: #ff5aac; animation-delay: .6s; }
+    .c7 { left: 252px; top: 136px; background: #ffffff; animation-delay: .2s; }
+    .c8 { left: 286px; top: 90px; background: #7096ff; animation-delay: .65s; }
+    .c9 { left: 40px; top: 156px; background: #ff5aac; animation-delay: .3s; }
+    .c10 { left: 118px; top: 108px; background: #ffffff; animation-delay: .45s; }
+    .c11 { left: 198px; top: 152px; background: #7096ff; animation-delay: .15s; }
+    .c12 { left: 268px; top: 150px; background: #ff5aac; animation-delay: .55s; }
+
+    .dome.roll::before {
+      animation: glassShake 2.9s ease-in-out;
+    }
+
+    .base {
+      margin-top: -10px;
+      height: 254px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #ff87c0 0%, #f65aa0 58%, #ec4a92 100%);
+      border: 4px solid #ff98cc;
+      padding: 16px 16px 14px;
+      position: relative;
+    }
+
+    .base::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      top: 12px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0));
+    }
+
+    .point-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 2px 4px 10px;
+      gap: 10px;
+    }
+
+    .point-label {
+      color: #ffdff0;
+      font-weight: 700;
+      font-size: 24px;
+      text-shadow: 0 2px rgba(138, 31, 79, 0.45);
+      letter-spacing: 1px;
+    }
+
+    .point-screen {
+      width: 126px;
+      height: 50px;
+      border-radius: 13px;
+      border: 3px solid #d3dcff;
+      background: linear-gradient(90deg, #4688ff, #76a8ff);
+      box-shadow: inset 0 8px rgba(255, 255, 255, 0.28), 0 6px 10px rgba(93, 37, 84, 0.2);
+      color: #f4f9ff;
+      font-size: 42px;
+      line-height: 42px;
+      text-align: center;
+      font-weight: 800;
+      text-shadow: 0 2px rgba(38, 68, 138, 0.5);
+    }
+
+    .brand-lights {
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .brand-lights i {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #ffe88d, #ffcf54);
+      box-shadow: 0 2px 6px rgba(255, 232, 141, 0.6);
+    }
+
+    .knob-zone {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .knob {
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      border: 8px solid #f271aa;
+      background: radial-gradient(circle at 34% 30%, #fff6fb 0%, #ffdf85 34%, #ff9ec8 68%, #f35f9f 100%);
+      position: relative;
+      cursor: pointer;
+      transition: transform .2s ease;
+      box-shadow: inset 0 4px rgba(255, 255, 255, 0.5), 0 6px 12px rgba(115, 45, 86, 0.25);
+    }
+
+    .knob::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #5e87ff;
+    }
+
+    .knob:active { transform: scale(.95) rotate(20deg); }
+
+    .exit-slot {
+      width: 128px;
+      height: 54px;
+      border-radius: 14px;
+      border: 4px solid #ffaed7;
+      background: #ffd7eb;
+      box-shadow: inset 0 8px rgba(0, 0, 0, 0.13), 0 5px 12px rgba(125, 45, 83, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slot-inner {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 6px;
+      height: 20px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffd34f, #ffbf00);
+      box-shadow: inset 0 4px rgba(255, 255, 255, 0.4);
+    }
+
+    .drop-area {
+      position: relative;
+      margin-top: 12px;
+      height: 70px;
+      border-radius: 40px;
+      background: linear-gradient(180deg, rgba(221, 238, 255, 0.88), rgba(187, 216, 255, 0.5));
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.62);
+      box-shadow: inset 0 6px rgba(255, 255, 255, 0.5);
+    }
+
+    .falling-capsule {
+      --cx: 44px;
+      --tx: -56px;
+      position: absolute;
+      top: -56px;
+      left: var(--cx);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.65);
+      box-shadow: inset -8px -8px rgba(0, 0, 0, 0.12);
+      background: #7196ff;
+      opacity: 0;
+      transform: translateY(0);
+    }
+
+    .falling-capsule.drop {
+      opacity: 1;
+      animation: dropBounce 1.4s cubic-bezier(.2, .75, .35, 1) forwards;
+    }
+
+    .actions {
+      width: min(370px, 95vw);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: -6px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      height: 52px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(112, 53, 99, 0.25), inset 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .draw-btn {
+      background: linear-gradient(180deg, #ff7a1c, #f44a00);
+    }
+
+    .prize-btn {
+      background: linear-gradient(180deg, #7f62ff, #5f39e5);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(360px, 92vw);
+      background: var(--panel);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-title {
+      margin: 0;
+      text-align: center;
+      color: #f04288;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .modal-prize {
+      margin: 12px 0 14px;
+      text-align: center;
+      color: #7b2a57;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .modal-prize-image {
+      display: block;
+      width: min(220px, 70vw);
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 10px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 12px;
+      border: 2px solid #f1d8e9;
+    }
+
+    .record-list {
+      margin: 12px 0;
+      padding: 0;
+      list-style: none;
+      max-height: 260px;
+      overflow: auto;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .record-item {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f1e1ed;
+      font-size: 15px;
+      color: #6e3151;
+    }
+
+    .record-item:last-child {
+      border-bottom: 0;
+    }
+
+    .empty-record {
+      text-align: center;
+      color: #9a6a83;
+      margin: 14px 0 8px;
+      font-size: 15px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .modal-actions button {
+      flex: 1;
+      height: 44px;
+      font-size: 16px;
+      border-radius: 12px;
+    }
+
+    .btn-light {
+      background: linear-gradient(180deg, #b28dff, #8e69e8);
+    }
+
+    .task-tip {
+      margin: 8px 0 0;
+      text-align: center;
+      color: #84567d;
+      font-size: 14px;
+    }
+
+    .task-list {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .task-item {
+      padding: 10px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid #f1e2ef;
+    }
+
+    .task-title {
+      margin: 0 0 8px;
+      color: #70365a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .task-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .task-row input {
+      flex: 1;
+      border: 1px solid #e5cde0;
+      border-radius: 8px;
+      padding: 0 10px;
+      height: 36px;
+      font-size: 14px;
+    }
+
+    .task-row button {
+      width: 92px;
+      height: 36px;
+      border-radius: 8px;
+      font-size: 14px;
+      box-shadow: none;
+    }
+
+    .task-done {
+      margin: 0;
+      color: #3a8b45;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .notice-text {
+      margin: 12px 0 10px;
+      text-align: center;
+      color: #70365a;
+      font-size: 16px;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+
+    .paws {
+      position: absolute;
+      width: 100%;
+      inset: 0;
+      pointer-events: none;
+      opacity: .25;
+    }
+
+    .paw {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #ff7db2;
+      border-radius: 50%;
+    }
+
+    .paw::before,
+    .paw::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 9px;
+      background: #ff7db2;
+      border-radius: 50%;
+      top: -7px;
+    }
+
+    .paw::before { left: 1px; transform: rotate(-22deg); }
+    .paw::after { right: 1px; transform: rotate(22deg); }
+
+    .p1 { left: 4px; top: 18%; transform: rotate(-18deg); }
+    .p2 { right: 8px; top: 28%; transform: rotate(16deg); }
+    .p3 { left: 10px; bottom: 16%; transform: rotate(8deg); }
+    .p4 { right: 0; bottom: 12%; transform: rotate(-12deg); }
+
+    .floor-glow {
+      width: min(390px, 96vw);
+      height: 50px;
+      margin-top: -30px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(180, 205, 255, 0.7) 0%, rgba(187, 214, 255, 0.4) 36%, rgba(255, 255, 255, 0) 70%);
+      filter: blur(1.5px);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes dropBounce {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      36% { transform: translate(calc(var(--tx) * 0.45), 58px) rotate(240deg) scale(1); }
+      58% { transform: translate(calc(var(--tx) * 0.8), 78px) rotate(430deg) scale(1); }
+      76% { transform: translate(calc(var(--tx) * 0.92), 66px) rotate(560deg) scale(1.03); }
+      90% { transform: translate(calc(var(--tx) * 0.97), 78px) rotate(670deg) scale(.98); }
+      100% { transform: translate(var(--tx), 74px) rotate(760deg) scale(1); }
+    }
+
+    @keyframes glassShake {
+      0%, 100% { transform: translateX(0); opacity: 1; }
+      20% { transform: translateX(-5px); opacity: .9; }
+      40% { transform: translateX(4px); opacity: .82; }
+      60% { transform: translateX(-3px); opacity: .88; }
+      80% { transform: translateX(2px); opacity: .95; }
+    }
+
+    @media (max-height: 820px) {
+      .title { font-size: clamp(24px, 6.7vw, 30px); }
+      .machine-head { padding-top: 8px; padding-bottom: 8px; }
+      .head-title { font-size: clamp(24px, 7.3vw, 30px); }
+      .dome { height: 200px; }
+      .base { height: 244px; }
+      .point-label { font-size: 20px; }
+      .point-screen { width: 112px; height: 44px; font-size: 36px; line-height: 36px; }
+      button { height: 48px; font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgm" src="bgm.mp3" loop preload="auto" autoplay></audio>
+  <main class="page">
+    <div class="kitty-bow"><span></span></div>
+    <section class="machine-head" aria-label="活动灯牌">
+      <p class="year-tag">2026</p>
+      <p class="head-title"><span>超级妞妞</span>生日扭蛋机</p>
+    </section>
+
+    <section class="machine-wrap">
+      <div class="machine">
+        <div class="dome">
+          <i class="capsule c1"></i>
+          <i class="capsule c2 ccw"></i>
+          <i class="capsule c3"></i>
+          <i class="capsule c4 ccw"></i>
+          <i class="capsule c5"></i>
+          <i class="capsule c6 ccw"></i>
+          <i class="capsule c7"></i>
+          <i class="capsule c8 ccw"></i>
+          <i class="capsule c9"></i>
+          <i class="capsule c10 ccw"></i>
+          <i class="capsule c11"></i>
+          <i class="capsule c12 ccw"></i>
+        </div>
+        <div class="base">
+          <div class="brand-lights" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </div>
+          <div class="point-row">
+            <span class="point-label">剩余积分</span>
+            <span id="pointScreen" class="point-screen">0</span>
+          </div>
+          <div class="knob-zone">
+            <button id="knob" class="knob" aria-label="旋转扭蛋机旋钮"></button>
+            <div class="exit-slot">
+              <i class="slot-inner"></i>
+            </div>
+          </div>
+          <div class="drop-area" id="dropArea" aria-hidden="true">
+            <i id="fallingCapsule" class="falling-capsule"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="floor-glow"></div>
+
+    <section class="actions">
+      <button id="drawBtn" class="draw-btn">开始抽奖</button>
+      <button id="prizeBtn" class="prize-btn">查看奖品（我的中奖记录）</button>
+    </section>
+
+    <div class="paws">
+      <i class="paw p1"></i>
+      <i class="paw p2"></i>
+      <i class="paw p3"></i>
+      <i class="paw p4"></i>
+    </div>
+  </main>
+
+  <section class="modal" id="prizeModal" aria-hidden="true">
+    <div class="modal-card">
+      <h2 class="modal-title">抽奖成功</h2>
+      <img id="modalPrizeImage" class="modal-prize-image" src="" alt="奖品图片" />
+      <p class="modal-prize" id="modalPrizeText"></p>
+      <div class="modal-actions">
+        <button id="closePrizeModal" class="btn-light">继续抽奖</button>
+        <button id="toRecordBtn" class="draw-btn">查看记录</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="modal" id="recordModal" aria-hidden="true">
+    <div class="modal-card">
+      <h2 class="modal-title">我的中奖记录</h2>
+      <p id="emptyRecordText" class="empty-record">还没有中奖记录，快去抽一次吧～</p>
+      <ul id="recordList" class="record-list"></ul>
+      <div class="modal-actions">
+        <button id="closeRecordModal" class="btn-light">关闭</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="modal" id="taskModal" aria-hidden="true">
+    <div class="modal-card">
+      <h2 class="modal-title">做任务领取积分</h2>
+      <p class="task-tip">每项任务仅可完成一次，每次 +20 积分</p>
+      <ul class="task-list">
+        <li class="task-item">
+          <p class="task-title">1. 输入老公农历生日</p>
+          <div class="task-row">
+            <input id="taskBirthdayInput" type="text" placeholder="请输入答案" />
+            <button id="taskBirthdayBtn" class="draw-btn">完成</button>
+          </div>
+          <p id="taskBirthdayDone" class="task-done" hidden>已完成 +20</p>
+        </li>
+        <li class="task-item">
+          <p class="task-title">2. 亲老公一口（点击完成即可）</p>
+          <div class="task-row">
+            <button id="taskKissBtn" class="draw-btn">完成</button>
+          </div>
+          <p id="taskKissDone" class="task-done" hidden>已完成 +20</p>
+        </li>
+        <li class="task-item">
+          <p class="task-title">3. 说出老公五个优点（点击完成即可）</p>
+          <div class="task-row">
+            <button id="taskPraiseBtn" class="draw-btn">完成</button>
+          </div>
+          <p id="taskPraiseDone" class="task-done" hidden>已完成 +20</p>
+        </li>
+        <li class="task-item">
+          <p class="task-title">4. 输入我们第一次见面的地点</p>
+          <div class="task-row">
+            <input id="taskPlaceInput" type="text" placeholder="请输入答案" />
+            <button id="taskPlaceBtn" class="draw-btn">完成</button>
+          </div>
+          <p id="taskPlaceDone" class="task-done" hidden>已完成 +20</p>
+        </li>
+      </ul>
+      <div class="modal-actions">
+        <button id="closeTaskModal" class="btn-light">关闭</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="modal" id="noticeModal" aria-hidden="true">
+    <div class="modal-card">
+      <h2 class="modal-title" id="noticeTitle">提示</h2>
+      <p id="noticeText" class="notice-text"></p>
+      <div class="modal-actions">
+        <button id="noticeCancelBtn" class="btn-light" style="display:none;">取消</button>
+        <button id="noticeConfirmBtn" class="draw-btn">确定</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const DRAW_COST = 20;
+    const EXTRA_POINTS = 60;
+    const ROLL_DURATION = 5900;
+    const BASE_POINT_DRAWS = 4;
+
+    const prizePool = [
+      { level: "二等奖", name: "天佑爱人编号黑胶✖1", image: "二等奖（天佑爱人黑胶专辑）.jpeg", count: 1, isFirst: false },
+      { level: "三等奖", name: "香奈儿小眼镜✖1", image: "三等奖（香奈儿眼镜）.jpeg", count: 1, isFirst: false },
+      { level: "安慰奖", name: "小哈玩偶✖1", image: "安慰奖（小哈玩偶）.jpeg", count: 4, isFirst: false },
+      { level: "一等奖", name: "浪琴小手表✖1", image: "一等奖（浪琴-心月）.jpeg", count: 1, isFirst: true }
+    ];
+
+    const drawBtn = document.getElementById("drawBtn");
+    const prizeBtn = document.getElementById("prizeBtn");
+    const knob = document.getElementById("knob");
+    const dome = document.querySelector(".dome");
+    const bgm = document.getElementById("bgm");
+    const pointScreen = document.getElementById("pointScreen");
+    const dropArea = document.getElementById("dropArea");
+    const fallingCapsule = document.getElementById("fallingCapsule");
+    const capsules = Array.from(document.querySelectorAll(".dome .capsule"));
+
+    const prizeModal = document.getElementById("prizeModal");
+    const recordModal = document.getElementById("recordModal");
+    const taskModal = document.getElementById("taskModal");
+    const noticeModal = document.getElementById("noticeModal");
+    const modalPrizeText = document.getElementById("modalPrizeText");
+    const modalPrizeImage = document.getElementById("modalPrizeImage");
+    const closePrizeModal = document.getElementById("closePrizeModal");
+    const toRecordBtn = document.getElementById("toRecordBtn");
+    const closeRecordModal = document.getElementById("closeRecordModal");
+    const closeTaskModal = document.getElementById("closeTaskModal");
+    const noticeTitle = document.getElementById("noticeTitle");
+    const noticeText = document.getElementById("noticeText");
+    const noticeCancelBtn = document.getElementById("noticeCancelBtn");
+    const noticeConfirmBtn = document.getElementById("noticeConfirmBtn");
+    const recordList = document.getElementById("recordList");
+    const emptyRecordText = document.getElementById("emptyRecordText");
+
+    const taskBirthdayInput = document.getElementById("taskBirthdayInput");
+    const taskBirthdayBtn = document.getElementById("taskBirthdayBtn");
+    const taskBirthdayDone = document.getElementById("taskBirthdayDone");
+    const taskKissBtn = document.getElementById("taskKissBtn");
+    const taskKissDone = document.getElementById("taskKissDone");
+    const taskPraiseBtn = document.getElementById("taskPraiseBtn");
+    const taskPraiseDone = document.getElementById("taskPraiseDone");
+    const taskPlaceInput = document.getElementById("taskPlaceInput");
+    const taskPlaceBtn = document.getElementById("taskPlaceBtn");
+    const taskPlaceDone = document.getElementById("taskPlaceDone");
+
+    const taskState = {
+      birthday: false,
+      kiss: false,
+      praise: false,
+      place: false,
+      extra: false
+    };
+
+    const wonRecords = [];
+    let points = 0;
+    let isDrawing = false;
+    let noticeResolver = null;
+    let pendingExtraGrant = false;
+    let drawCount = 0;
+
+    function openModal(modalEl) {
+      modalEl.classList.add("show");
+      modalEl.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal(modalEl) {
+      modalEl.classList.remove("show");
+      modalEl.setAttribute("aria-hidden", "true");
+    }
+
+    function updatePoints() {
+      pointScreen.textContent = String(points);
+    }
+
+    function addPoints(amount) {
+      points += amount;
+      updatePoints();
+      showNotice("获得积分 +" + amount + "，当前积分：" + points);
+    }
+
+    function showNotice(message, title) {
+      noticeTitle.textContent = title || "提示";
+      noticeText.textContent = message;
+      noticeCancelBtn.style.display = "none";
+      openModal(noticeModal);
+    }
+
+    function askNotice(message, title) {
+      noticeTitle.textContent = title || "提示";
+      noticeText.textContent = message;
+      noticeCancelBtn.style.display = "inline-block";
+      openModal(noticeModal);
+      return new Promise((resolve) => {
+        noticeResolver = resolve;
+      });
+    }
+
+    async function maybeGrantExtraPoints() {
+      if (!pendingExtraGrant || taskState.extra) return;
+      const grant = await askNotice("基础任务积分已抽完，再亲老公十口可获得额外60积分，是否确认领取？");
+      if (grant) {
+        taskState.extra = true;
+        addPoints(EXTRA_POINTS);
+      }
+      pendingExtraGrant = false;
+    }
+
+    function normalizeAnswer(value) {
+      return value.replace(/\s+/g, "").trim();
+    }
+
+    function allBaseTasksDone() {
+      return taskState.birthday && taskState.kiss && taskState.praise && taskState.place;
+    }
+
+    function totalRemainingCount() {
+      return prizePool.reduce((acc, item) => acc + item.count, 0);
+    }
+
+    function getPrizeByRule() {
+      const firstPrize = prizePool.find((item) => item.isFirst);
+      const remaining = totalRemainingCount();
+      if (remaining === 1 && firstPrize && firstPrize.count > 0) {
+        return firstPrize;
+      }
+      const candidates = prizePool.filter((item) => !item.isFirst && item.count > 0);
+      if (drawCount < BASE_POINT_DRAWS) {
+        const weighted = candidates.map((item) => {
+          let weight = 1;
+          if (item.level === "安慰奖") weight = 3.2;
+          if (item.level === "二等奖" || item.level === "三等奖") weight = 1.3;
+          return { item, score: weight * item.count };
+        });
+        const totalScore = weighted.reduce((sum, w) => sum + w.score, 0);
+        let pick = Math.random() * totalScore;
+        for (const w of weighted) {
+          pick -= w.score;
+          if (pick <= 0) return w.item;
+        }
+        return weighted[weighted.length - 1].item;
+      }
+      const randomIndex = Math.floor(Math.random() * candidates.length);
+      return candidates[randomIndex];
+    }
+
+    function renderRecords() {
+      recordList.innerHTML = "";
+      if (wonRecords.length === 0) {
+        emptyRecordText.style.display = "block";
+        return;
+      }
+      emptyRecordText.style.display = "none";
+      wonRecords
+        .slice()
+        .reverse()
+        .forEach((item) => {
+          const li = document.createElement("li");
+          li.className = "record-item";
+          li.textContent = item.time + "  " + item.level + "：" + item.name;
+          recordList.appendChild(li);
+        });
+    }
+
+    function dropAnimation() {
+      const colors = ["#7196ff", "#ff5aac", "#ffffff", "#7fb0ff"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const releaseDelay = Math.max(ROLL_DURATION - 1400, 0);
+      const capsuleSize = 48;
+      const minX = 6;
+      const maxX = Math.max(minX, dropArea.clientWidth - capsuleSize - 6);
+      const startX = Math.min(maxX, Math.max(minX, maxX - 10));
+      const endX = Math.max(minX, Math.min(maxX, startX - (Math.random() * 60 + 24)));
+      const tx = endX - startX;
+      dome.classList.remove("roll");
+      void dome.offsetWidth;
+      dome.classList.add("roll");
+      setTimeout(() => dome.classList.remove("roll"), ROLL_DURATION);
+      animateCapsulesInDome(ROLL_DURATION);
+      fallingCapsule.style.setProperty("--cx", startX + "px");
+      fallingCapsule.style.setProperty("--tx", tx + "px");
+      fallingCapsule.style.background = color;
+      fallingCapsule.classList.remove("drop");
+      setTimeout(() => {
+        void fallingCapsule.offsetWidth;
+        fallingCapsule.classList.add("drop");
+      }, releaseDelay);
+      return new Promise((resolve) => setTimeout(resolve, ROLL_DURATION));
+    }
+
+    function animateCapsulesInDome(durationMs) {
+      const domeRect = dome.getBoundingClientRect();
+      const states = capsules.map((el) => {
+        const r = el.getBoundingClientRect();
+        return {
+          el,
+          x: el.offsetLeft,
+          y: el.offsetTop,
+          size: r.width || 54,
+          vx: (Math.random() * 2 - 1) * 300,
+          vy: (Math.random() * 2 - 1) * 300
+        };
+      });
+
+      const minX = 4;
+      const minY = 16;
+      const maxX = domeRect.width - 58;
+      const maxY = domeRect.height - 58;
+      const radius = 27;
+      const minDist = radius * 2;
+      const start = performance.now();
+      let last = start;
+
+      function step(now) {
+        const dt = Math.min((now - last) / 1000, 0.033);
+        last = now;
+        const t = now - start;
+        const damping = t < durationMs * 0.82 ? 0.9984 : 0.992;
+
+        states.forEach((s) => {
+          s.vx *= damping;
+          s.vy *= damping;
+          s.x += s.vx * dt;
+          s.y += s.vy * dt;
+
+          if (s.x <= minX) {
+            s.x = minX;
+            s.vx = Math.abs(s.vx) * 0.95;
+          } else if (s.x >= maxX) {
+            s.x = maxX;
+            s.vx = -Math.abs(s.vx) * 0.95;
+          }
+
+          if (s.y <= minY) {
+            s.y = minY;
+            s.vy = Math.abs(s.vy) * 0.95;
+          } else if (s.y >= maxY) {
+            s.y = maxY;
+            s.vy = -Math.abs(s.vy) * 0.95;
+          }
+        });
+
+        for (let i = 0; i < states.length; i++) {
+          for (let j = i + 1; j < states.length; j++) {
+            const a = states[i];
+            const b = states[j];
+            const ax = a.x + radius;
+            const ay = a.y + radius;
+            const bx = b.x + radius;
+            const by = b.y + radius;
+            const dx = bx - ax;
+            const dy = by - ay;
+            const distSq = dx * dx + dy * dy;
+            if (distSq === 0) continue;
+            const dist = Math.sqrt(distSq);
+            if (dist >= minDist) continue;
+
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const overlap = minDist - dist;
+
+            // 分离修正，避免扭蛋互相重叠
+            a.x -= nx * overlap * 0.5;
+            a.y -= ny * overlap * 0.5;
+            b.x += nx * overlap * 0.5;
+            b.y += ny * overlap * 0.5;
+
+            const relVx = b.vx - a.vx;
+            const relVy = b.vy - a.vy;
+            const alongNormal = relVx * nx + relVy * ny;
+            if (alongNormal < 0) {
+              const impulse = -alongNormal * 0.9;
+              a.vx -= impulse * nx;
+              a.vy -= impulse * ny;
+              b.vx += impulse * nx;
+              b.vy += impulse * ny;
+            }
+          }
+        }
+
+        states.forEach((s) => {
+          s.x = Math.min(maxX, Math.max(minX, s.x));
+          s.y = Math.min(maxY, Math.max(minY, s.y));
+          s.el.style.left = s.x.toFixed(1) + "px";
+          s.el.style.top = s.y.toFixed(1) + "px";
+        });
+
+        if (t < durationMs) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    async function drawOnce() {
+      if (isDrawing) return;
+      if (totalRemainingCount() <= 0) {
+        showNotice("奖品已经全部抽完啦");
+        return;
+      }
+      if (points < DRAW_COST) {
+        const goTask = await askNotice("积分不足（抽奖需20积分）。是否前往做任务领取积分？");
+        if (goTask) openModal(taskModal);
+        return;
+      }
+      isDrawing = true;
+      drawBtn.disabled = true;
+      knob.disabled = true;
+      points -= DRAW_COST;
+      updatePoints();
+
+      await dropAnimation();
+      knob.animate(
+        [{ transform: "rotate(0deg)" }, { transform: "rotate(900deg)" }],
+        { duration: 5600, easing: "ease-out" }
+      );
+
+      const prize = getPrizeByRule();
+      prize.count -= 1;
+      drawCount += 1;
+
+      const now = new Date();
+      const time =
+        String(now.getHours()).padStart(2, "0") +
+        ":" +
+        String(now.getMinutes()).padStart(2, "0") +
+        ":" +
+        String(now.getSeconds()).padStart(2, "0");
+
+      wonRecords.push({ time, level: prize.level, name: prize.name, image: prize.image });
+      modalPrizeText.textContent = prize.level + "：" + prize.name;
+      modalPrizeImage.src = prize.image;
+      modalPrizeImage.alt = prize.name;
+      openModal(prizeModal);
+
+      if (allBaseTasksDone() && !taskState.extra && points < DRAW_COST && totalRemainingCount() > 0) {
+        pendingExtraGrant = true;
+      }
+
+      drawBtn.disabled = false;
+      knob.disabled = false;
+      isDrawing = false;
+    }
+
+    function completeTask(key, doneEl, btnEl) {
+      if (taskState[key]) return;
+      taskState[key] = true;
+      doneEl.hidden = false;
+      btnEl.disabled = true;
+      addPoints(20);
+    }
+
+    taskBirthdayBtn.addEventListener("click", () => {
+      const answer = normalizeAnswer(taskBirthdayInput.value);
+      if (taskState.birthday) return;
+      if (answer !== "十二月初六") {
+        showNotice("答案不对，再想想～");
+        return;
+      }
+      completeTask("birthday", taskBirthdayDone, taskBirthdayBtn);
+    });
+
+    taskPlaceBtn.addEventListener("click", () => {
+      const answer = normalizeAnswer(taskPlaceInput.value);
+      if (taskState.place) return;
+      if (answer !== "南京南站") {
+        showNotice("地点不对，再想想～");
+        return;
+      }
+      completeTask("place", taskPlaceDone, taskPlaceBtn);
+    });
+
+    taskKissBtn.addEventListener("click", () => {
+      completeTask("kiss", taskKissDone, taskKissBtn);
+    });
+
+    taskPraiseBtn.addEventListener("click", () => {
+      completeTask("praise", taskPraiseDone, taskPraiseBtn);
+    });
+
+    function tryPlayBgm() {
+      if (!bgm) return;
+      const promise = bgm.play();
+      if (promise && typeof promise.catch === "function") {
+        promise.catch(() => {});
+      }
+    }
+
+    tryPlayBgm();
+    document.addEventListener("touchstart", tryPlayBgm, { once: true });
+    document.addEventListener("click", tryPlayBgm, { once: true });
+
+    drawBtn.addEventListener("click", drawOnce);
+    knob.addEventListener("click", drawOnce);
+
+    prizeBtn.addEventListener("click", () => {
+      renderRecords();
+      openModal(recordModal);
+    });
+
+    closePrizeModal.addEventListener("click", async () => {
+      closeModal(prizeModal);
+      await maybeGrantExtraPoints();
+    });
+    toRecordBtn.addEventListener("click", async () => {
+      closeModal(prizeModal);
+      await maybeGrantExtraPoints();
+      renderRecords();
+      openModal(recordModal);
+    });
+    closeRecordModal.addEventListener("click", () => closeModal(recordModal));
+    closeTaskModal.addEventListener("click", () => closeModal(taskModal));
+    noticeConfirmBtn.addEventListener("click", () => {
+      closeModal(noticeModal);
+      if (noticeResolver) {
+        noticeResolver(true);
+        noticeResolver = null;
+      }
+    });
+    noticeCancelBtn.addEventListener("click", () => {
+      closeModal(noticeModal);
+      if (noticeResolver) {
+        noticeResolver(false);
+        noticeResolver = null;
+      }
+    });
+
+    prizeModal.addEventListener("click", (e) => {
+      if (e.target === prizeModal) closeModal(prizeModal);
+    });
+    recordModal.addEventListener("click", (e) => {
+      if (e.target === recordModal) closeModal(recordModal);
+    });
+    taskModal.addEventListener("click", (e) => {
+      if (e.target === taskModal) closeModal(taskModal);
+    });
+    noticeModal.addEventListener("click", (e) => {
+      if (e.target === noticeModal) {
+        closeModal(noticeModal);
+        if (noticeResolver) {
+          noticeResolver(false);
+          noticeResolver = null;
+        }
+      }
+    });
+
+    updatePoints();
+  </script>
+</body>
+</html>
